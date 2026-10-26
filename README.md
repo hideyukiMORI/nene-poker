@@ -7,7 +7,8 @@ It is a sibling of [NeNe Gambit](https://github.com/hideyukiMORI/nene-gambit) (c
 and [NeNe Igo](https://github.com/hideyukiMORI/nene-igo) (Go). The chips are imaginary points; nothing here involves money.
 
 🚧 **Nothing is drawn yet.** The cards and the hand evaluator are in place: over all 2,598,960 five-card hands and all 133,784,560 seven-card hands,
-the count of every hand category matches the published tables. The table rules (betting, side pots, splits) come next, still with no screen.
+the count of every hand category matches the published tables. The table rules (blinds, minimum raises, short all-ins, side pots, split pots and odd chips, heads-up) follow Robert's Rules of Poker, version 11.
+The screen comes next.
 
 ## Development
 
