@@ -1,32 +1,36 @@
 /// ポットとサイドポットの作り方と分け方（唯一の経路・ARC-001・ADR 0007）。
 ///
 /// 出典は Robert's Rules of Poker（Version 11）の第 3 節: サイドポットとメインのポットは別々に分ける（Ties の 5(d)）。
+/// サイドポットはオールインした人が取れる額を超えた分で、オールインした人の出した額で段を切る。
 /// 同じ強さの役で分けて割り切れないチップは、親から時計回りで最初の手が受け取る（Ties の 5(a)）。1 人が受け取る端数は 1 チップまで（Ties の 4）。
 public enum PotDivision {
-    /// 各席の出した額・争える席（降りていない席）・争える席の役の強さ（相手のいない層は見ない）・親の席から分け方を決める。
+    /// 各席の出した額と争える席（`stakes`）・争える席の役の強さ（相手のいない層は見ない）・親の席から分け方を決める。
     /// 争える席がちょうど 1 つなら、役の強さは要らない（`strengths` は空でよい）。
-    public static func divide(
-        contributions: [Seat: Int], contenders: Set<Seat>, strengths: [Seat: HandStrength], button: Seat
-    )
-        -> [PotAward]
-    {
+    public static func divide(_ stakes: PotStakes, strengths: [Seat: HandStrength], button: Seat) -> [PotAward] {
         let order = button.clockwiseFromNext
-        return layers(contributions: contributions, contenders: contenders, button: button).map { layer in
+        return layers(stakes, button: button).map { layer in
             award(amount: layer.amount, contenders: layer.contenders, strengths, order)
         }
     }
 
-    /// 出した額の段ごとのポット（メインが先・サイドが後）。同じ顔ぶれの段はまとめ、争える席の無い段は 1 つ下の段に足す。
-    /// ハンドの途中でも使う（画面の `POT 360 + SIDE 120`）。
-    public static func layers(contributions: [Seat: Int], contenders: Set<Seat>, button: Seat) -> [PotLayer] {
+    /// メインとサイドのポット（メインが先）。段は、オールインした争える席の出した額で切る。
+    /// ある段を争えるのは、その段の上限まで出したオールインの席と、まだ行動できる（オールインでない）争える席。
+    /// 降りた席の出した分もその段に入る。同じ顔ぶれの段はまとめ、額が 0 の段は作らない。ハンドの途中でも使う（画面の `POT 360 + SIDE 120`）。
+    public static func layers(_ stakes: PotStakes, button: Seat) -> [PotLayer] {
         let order = button.clockwiseFromNext
-        let levels = Array(Set(contributions.values.filter { $0 > 0 })).sorted()
+        let caps = Array(Set(stakes.allIn.map { stakes.contributions[$0, default: 0] }.filter { $0 > 0 })).sorted()
         var layers: [PotLayer] = []
         var previous = 0
-        for level in levels {
-            let amount = contributions.values.reduce(0) { $0 + min($1, level) - min($1, previous) }
-            let eligible = order.filter { contenders.contains($0) && contributions[$0, default: 0] >= level }
-            previous = level
+        for cap in caps + [Int.max] {
+            let amount = stakes.contributions.values.reduce(0) { $0 + min($1, cap) - min($1, previous) }
+            let eligible = order.filter { seat in
+                stakes.contenders.contains(seat)
+                    && (!stakes.allIn.contains(seat) || stakes.contributions[seat, default: 0] >= cap)
+            }
+            previous = cap
+            guard amount > 0 else {
+                continue
+            }
             if let last = layers.last, last.contenders == eligible || eligible.isEmpty {
                 layers[layers.count - 1] = PotLayer(amount: last.amount + amount, contenders: last.contenders)
             } else {
