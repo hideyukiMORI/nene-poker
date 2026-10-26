@@ -37,6 +37,16 @@ The whole script is [install.sh](install.sh), about 45 lines.
 - No Swift needed. It is a single file with the Swift standard library linked statically; the only dynamic dependencies are libc, libm, libstdc++ and libgcc_s
 - To uninstall: `rm ~/.local/bin/nene-poker`
 
+**From PowerShell** (Windows, with WSL):
+
+```powershell
+irm https://raw.githubusercontent.com/hideyukiMORI/nene-poker/main/install.ps1 | iex
+```
+
+It runs the same installer inside your default WSL distribution, then puts a small `nene-poker.cmd` in `%LOCALAPPDATA%\nene-poker\bin` and adds that folder to your user PATH,
+so `nene-poker` works from PowerShell and cmd too (it starts the WSL one through `wsl.exe`). Set `NENE_POKER_DISTRO` to use another distribution.
+The whole script is [install.ps1](install.ps1). To uninstall: delete `%LOCALAPPDATA%\nene-poker`, remove it from your PATH, and run `wsl rm ~/.local/bin/nene-poker`
+
 <details>
 <summary>Install by hand</summary>
 
