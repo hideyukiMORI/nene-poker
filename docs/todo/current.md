@@ -8,8 +8,8 @@
 | 段階 | 状態 |
 | --- | --- |
 | Phase 0 言語の実測 | ✅ 2026-10-26（80 ケース・Igo の 77 ケースと全件一致・ADR 0001） |
-| Phase 1 文書とゲートの足場 | 🔄 Issue #1 |
-| Phase 2 negative proof | 🔄 Issue #1 |
+| Phase 1 文書とゲートの足場 | ✅ 2026-10-26（Issue #1・PR #2・ruleset 25861956） |
+| Phase 2 negative proof | ✅ 2026-10-26（59 件すべて pass・GitHub 側 2 件・docs/quality/gate-proofs.md） |
 | Phase 3 縦切り（札と役判定から） | 🔲 別 Issue |
 | Phase 4 公開 | 🔲 別 Issue |
 
@@ -18,6 +18,8 @@
 - `make check`（道具の版・`swift build`・整形・lint・規約検査とその単体テスト・コミットの形）。target は 0 本で、製品コードは無い
 
 ## 動かないもの
+
+- `main` への直接 push・force push が拒まれることは試していない（ruleset の読み戻しと PR の `BLOCKED` で代えた・gate-proofs 第 4 節）
 
 - 製品そのもの（札・役判定・卓のルール・AI・描画・端末は Phase 3）
 - `swift test`（テスト target が無いので結線していない・ADR 0002）
