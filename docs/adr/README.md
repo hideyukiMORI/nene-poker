@@ -20,3 +20,5 @@ ADR は「なぜそう決めたか」「何を却下したか」を書く。
 | [0002](0002-swift-testing-only.md) | テスト枠組みは Swift Testing だけにする | 受理 |
 | [0003](0003-port-gates-from-igo.md) | ゲートと規約検査は NeNe Igo から移植し、証明はこのリポジトリで取り直す | 受理 |
 | [0004](0004-target-split-and-dependency-graph.md) | target は Core・Engine・Render・Terminal・合成ルートの 5 つに分け、兄弟と同じ向きで依存させる | 受理 |
+| [0005](0005-cards-and-hand-evaluation.md) | 札はランクとスートの閉じた enum、札の集まりは 64 ビットの整数、役判定は 7 枚から最良の 5 枚をビットで直接決める 1 経路 | 受理 |
+| [0006](0006-published-hand-counts-and-rule-tests.md) | 役判定の正しさは、5 枚と 7 枚の全数の公表値と、21 通りの比較と、手作りの組で確かめる | 受理 |

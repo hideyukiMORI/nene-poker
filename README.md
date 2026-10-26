@@ -6,9 +6,8 @@ Written in Swift for Ubuntu on WSL2 and Windows Terminal. The rules, the hand ev
 It is a sibling of [NeNe Gambit](https://github.com/hideyukiMORI/nene-gambit) (chess), [NeNe Reversi](https://github.com/hideyukiMORI/nene-reversi)
 and [NeNe Igo](https://github.com/hideyukiMORI/nene-igo) (Go). The chips are imaginary points; nothing here involves money.
 
-🚧 **Nothing runs yet.** The rules and the gate are being put in place before any product code is written (Issue #1).
-The first product code will be the cards and the hand evaluator, with no screen, and nothing is drawn until the counts of every hand category
-over all 5-card hands match the published ones.
+🚧 **Nothing is drawn yet.** The cards and the hand evaluator are in place: over all 2,598,960 five-card hands and all 133,784,560 seven-card hands,
+the count of every hand category matches the published tables. The table rules (betting, side pots, splits) come next, still with no screen.
 
 ## Development
 

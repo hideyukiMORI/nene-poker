@@ -151,6 +151,6 @@ Waivers: none | WVR-NNNN
 
 現在のタスクは [docs/todo/current.md](docs/todo/current.md)。GitHub Issue が正で、そこは要約。
 
-- 動くもの: `make check`（target は 0 本・製品コードは無い）
-- 動かないもの: 製品そのもの。Phase 3 の最初は「札と役判定（Core だけ・画面なし）」で、役の種類ごとの数が公表値と一致するまで卓のルールと画面に入らない
+- 動くもの: `make check`。Core の札・山札・役判定（7 枚から最良の 5 枚）。5 枚と 7 枚の全数の役の数が公表値と一致（ADR 0005・0006）
+- 動かないもの: 卓のルール（Phase 3-2）・画面・AI。卓のルールが手作りの局面とチップの保存で確かめられるまで画面に入らない
 - 施主の決定は [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) にそろっている。決定を覆したくなった点や、要件に無い機能を足したくなった点は、自分で決めずに施主に聞く
