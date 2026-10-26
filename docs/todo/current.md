@@ -12,7 +12,8 @@
 | Phase 2 negative proof | ✅ 2026-10-26（59 件すべて pass・GitHub 側 2 件・docs/quality/gate-proofs.md） |
 | Phase 3-1 札と役判定 | ✅ 2026-10-26（Issue #3・5 枚と 7 枚の全数が公表値と一致・ADR 0005・0006） |
 | Phase 3-2 卓のルール | ✅ 2026-10-26（Issue #5・Robert's Rules of Poker Version 11・ADR 0007） |
-| Phase 3-3〜3-6 画面・AI・HUD | 🔲 別 Issue |
+| Phase 3-3 乱数の 4 人の卓を画面に | ✅ 2026-10-26（Issue #7・ADR 0008・0009） |
+| Phase 3-4〜3-6 実機の写真・AI・HUD | 🔲 別 Issue |
 | Phase 4 公開 | 🔲 別 Issue |
 
 ## 動くもの
@@ -22,13 +23,14 @@
 
 - Core: 卓のルール（ブラインド・手番・最小のベットとレイズ・足りないオールイン・サイドポット・スプリットと端数・ヘッズアップ・親の回り方・優勝）。乱数で打った 200 卓でチップの保存と終わりを確かめた
 
+- `nene-poker`: 乱数の 4 人の卓を 112 × 28 の大の配置で描き続ける。`v` で札の見せ方・`q` で終了・どの終わり方でも端末を戻す（`make smoke`）
+
 ## 動かないもの
 
 - `main` への直接 push・force push が拒まれることは試していない（ruleset の読み戻しと PR の `BLOCKED` で代えた・gate-proofs 第 4 節）
 
-- AI・描画・端末
+- 実機（Windows Terminal）での見え方の確認・勝率の見積もりと性格・12 テーマ・縮小版・セリフ
 
 ## 次の 1 手
 
-Phase 3-3「ランダムに行動する 4 人の卓を画面に出す」の Issue を立てる。Igo の Terminal と Render の土台を移植し、画面仕様の大の配置・`v` のトグル・
-卓の終わりと次の卓・`q`・端末の復元・疑似端末での smoke を入れる。
+Phase 3-4「実機の画面写真」の Issue を立てる。Windows Terminal で札・スートの 4 色・`v` の両モード・文字幅を写真で確かめ、写真で直す。

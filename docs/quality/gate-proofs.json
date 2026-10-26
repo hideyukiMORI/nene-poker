@@ -1,12 +1,12 @@
 {
   "measured_on": "2026-10-26",
-  "head": "eceddb5",
+  "head": "7bc1786",
   "note": "verdict=pass は「意図した規則で落ちた」（対照は exit 0）。作業木の未コミットの変更も複製に含む。",
   "results": [
     {
       "id": "P00",
       "rules": [],
-      "violation": "対照: 足場だけ（違反なし）。合成ルートが時計・乱数・CommandLine・print を使い、Terminal が withUnsafe を使う",
+      "violation": "対照: 作業木そのまま（違反なし）。合成ルートが時計・乱数・CommandLine・getenv を使い、Terminal が withUnsafe と ioctl を使う",
       "command": "make check",
       "exit": 0,
       "expected": "make check: 緑",
@@ -16,35 +16,12 @@
       ],
       "missing": [],
       "tail": [
-        "✔ Test run with 18 tests in 4 suites passed after 3.610 seconds.",
+        "smoke: 失敗 0 件",
         "python3 eng/validate-commit-message.py --range \"origin/main..HEAD\"",
-        "commits: 1 件・違反 0 件",
+        "commits: 2 件・違反 0 件",
         "make check: 緑",
         "----------------------------------------------------------------------",
-        "Ran 101 tests in 0.261s",
-        "",
-        "OK"
-      ]
-    },
-    {
-      "id": "P00b",
-      "rules": [],
-      "violation": "対照: 足場を置かない作業木そのまま",
-      "command": "make check",
-      "exit": 0,
-      "expected": "make check: 緑",
-      "verdict": "pass",
-      "evidence": [
-        "make check: 緑"
-      ],
-      "missing": [],
-      "tail": [
-        "✔ Test run with 18 tests in 4 suites passed after 3.571 seconds.",
-        "python3 eng/validate-commit-message.py --range \"origin/main..HEAD\"",
-        "commits: 1 件・違反 0 件",
-        "make check: 緑",
-        "----------------------------------------------------------------------",
-        "Ran 101 tests in 0.263s",
+        "Ran 101 tests in 0.268s",
         "",
         "OK"
       ]
@@ -70,7 +47,7 @@
         "2 | ",
         "3 | /// 証明用。",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -emit-module -experimental-skip-non-inlinable-function-bodies-without-types Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandStrength.swift Sources/NeNePokerCore/Probe.swift Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift Sources/NeNePokerCore/Square.swift Sources/NeNePokerCore/Suit.swift -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P01-9osxlaj7 -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P01-9osxlaj7 -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -emit-module-doc-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Modules/NeNePokerCore.swiftdoc -emit-module-source-info-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Modules/NeNePokerCore.swiftsourceinfo -emit-objc-header-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore-Swift.h -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore-primary-emit-module.dia -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore-primary-emit-module.d -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Modules/NeNePokerCore.swiftmodule",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -emit-module -experimental-skip-non-inlinable-function-bodies-without-types Sources/NeNePokerCore/Action.swift Sources/NeNePokerCore/ActionRejection.swift Sources/NeNePokerCore/Bets.swift Sources/NeNePokerCore/BlindLevel.swift Sources/NeNePokerCore/BlindSchedule.swift Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/Hand+Betting.swift Sources/NeNePokerCore/Hand+Flow.swift Sources/NeNePokerCore/Hand.swift Sources/NeNePokerCore/HandApplyOutcome.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEnding.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandProgress.swift Sources/NeNePokerCore/HandResult.swift Sources/NeNePokerCore/HandStrength.swift Sources/NeNePokerCore/LegalActions.swift Sources/NeNePokerCore/PotAward.swift Sources/NeNePokerCore/PotDivision.swift Sources/NeNePokerCore/PotLayer.swift Sources/NeNePokerCore/PotStakes.swift Sources/NeNePokerCore/Probe.swift Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift Sources/NeNePokerCore/Seat.swift Sources/NeNePokerCore/SeatStatus.swift Sources/NeNePokerCore/Seating.swift Sources/NeNePokerCore/Street.swift Sources/NeNePokerCore/Suit.swift Sources/NeNePokerCore/Table.swift Sources/NeNePokerCore/TableRules.swift -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P01-4xz9vv8z -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P01-4xz9vv8z -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -emit-module-doc-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Modules/NeNePokerCore.swiftdoc -emit-module-source-info-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Modules/NeNePokerCore.swiftsourceinfo -emit-objc-header-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore-Swift.h -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore-primary-emit-module.dia -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore-primary-emit-module.d -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Modules/NeNePokerCore.swiftmodule",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -88,18 +65,18 @@
       "expected": "^CNF-010 Package\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-010 Package.swift:17: target NeNePokerTerminal の依存が正本と違う（余分: NeNePokerCore / 不足: なし）"
+        "CNF-010 Package.swift:26: target NeNePokerTerminal の依存が正本と違う（余分: NeNePokerCore / 不足: なし）"
       ],
       "missing": [],
       "tail": [
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.86 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.77 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-010 Package.swift:17: target NeNePokerTerminal の依存が正本と違う（余分: NeNePokerCore / 不足: なし）",
+        "CNF-010 Package.swift:26: target NeNePokerTerminal の依存が正本と違う（余分: NeNePokerCore / 不足: なし）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -120,14 +97,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (5.03 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (6.45 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-011 Sources/NeNePokerCore/Probe.swift:1: NeNePokerCore は Foundation を import できない",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -136,24 +113,24 @@
         "ARC-007",
         "CNF-012"
       ],
-      "violation": "Engine が using: の無い Int.random を呼ぶ",
+      "violation": "Engine が using: の無い shuffled を呼ぶ",
       "command": "make check",
       "exit": 2,
-      "expected": "^CNF-012 Sources/NeNePokerEngine/Pick\\.swift",
+      "expected": "^CNF-012 Sources/NeNePokerEngine/Lineup\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-012 Sources/NeNePokerEngine/Pick.swift:7: random(...) は using: で乱数源を受け取る"
+        "CNF-012 Sources/NeNePokerEngine/Lineup.swift:14: shuffled(...) は using: で乱数源を受け取る"
       ],
       "missing": [],
       "tail": [
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.76 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.76 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-012 Sources/NeNePokerEngine/Pick.swift:7: random(...) は using: で乱数源を受け取る",
+        "CNF-012 Sources/NeNePokerEngine/Lineup.swift:14: shuffled(...) は using: で乱数源を受け取る",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -172,14 +149,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.47 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.73 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-012 Tests/NeNePokerCoreTests/ProbeTests.swift:3: 時刻・乱数・環境・プロセス状態は合成ルートだけが読む",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -203,7 +180,7 @@
         "11 |     case .white:",
         "12 |         return 1",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandStrength.swift Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift -primary-file Sources/NeNePokerCore/Side.swift Sources/NeNePokerCore/Square.swift Sources/NeNePokerCore/Suit.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P06-4sfx7fy0 -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P06-4sfx7fy0 -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.o -index-store-path .build/out -index-system-modules",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNePokerCore/Action.swift Sources/NeNePokerCore/ActionRejection.swift Sources/NeNePokerCore/Bets.swift Sources/NeNePokerCore/BlindLevel.swift Sources/NeNePokerCore/BlindSchedule.swift Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/Hand+Betting.swift Sources/NeNePokerCore/Hand+Flow.swift Sources/NeNePokerCore/Hand.swift Sources/NeNePokerCore/HandApplyOutcome.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEnding.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandProgress.swift Sources/NeNePokerCore/HandResult.swift Sources/NeNePokerCore/HandStrength.swift Sources/NeNePokerCore/LegalActions.swift Sources/NeNePokerCore/PotAward.swift Sources/NeNePokerCore/PotDivision.swift Sources/NeNePokerCore/PotLayer.swift Sources/NeNePokerCore/PotStakes.swift Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift Sources/NeNePokerCore/Seat.swift Sources/NeNePokerCore/SeatStatus.swift -primary-file Sources/NeNePokerCore/Seating.swift -primary-file Sources/NeNePokerCore/Side.swift Sources/NeNePokerCore/Street.swift Sources/NeNePokerCore/Suit.swift Sources/NeNePokerCore/Table.swift Sources/NeNePokerCore/TableRules.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Seating.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Seating.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Seating.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Seating.dia -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P06-6ze1hetz -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P06-6ze1hetz -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Seating.o -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Seating.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Side.o -index-store-path .build/out -index-system-modules",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -224,14 +201,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104]",
-        "Build complete! (3.48 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.67 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-013 Sources/NeNePokerCore/Side.swift:15: 全捕捉（default / @unknown default / case _ / case let x / 括弧や並びに隠れた _ と束縛）は網羅性検査を殺す",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -249,14 +226,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] AllExcludingTests",
-        "Build complete! (3.80 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.64 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-013 Sources/NeNePokerCore/Side.swift:15: 全捕捉（default / @unknown default / case _ / case let x / 括弧や並びに隠れた _ と束縛）は網羅性検査を殺す",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -271,18 +248,18 @@
       "expected": "^CNF-016 Sources/NeNePokerRender/Cell\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-016 Sources/NeNePokerRender/Cell.swift:3: public の格納 var は外から変更できる（let か private(set) にする）"
+        "CNF-016 Sources/NeNePokerRender/Cell.swift:5: public の格納 var は外から変更できる（let か private(set) にする）"
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.68 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.68 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-016 Sources/NeNePokerRender/Cell.swift:3: public の格納 var は外から変更できる（let か private(set) にする）",
+        "CNF-016 Sources/NeNePokerRender/Cell.swift:5: public の格納 var は外から変更できる（let か private(set) にする）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -296,18 +273,18 @@
       "expected": "\\(force_unwrapping\\)",
       "verdict": "pass",
       "evidence": [
-        "Sources/nene-poker/main.swift:9:13: error: Force Unwrapping Violation: Force unwrapping should be avoided (force_unwrapping)"
+        "Sources/nene-poker/main.swift:51:85: error: Force Unwrapping Violation: Force unwrapping should be avoided (force_unwrapping)"
       ],
       "missing": [],
       "tail": [
-        "[99 / 102] NeNePokerRender",
-        "[99 / 102] NeNePokerTerminal",
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.58 secs)",
+        "[143 / 148] NeNePokerTerminal",
+        "[146 / 149] NeNePokerTerminal",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.58 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
-        "Sources/nene-poker/main.swift:9:13: error: Force Unwrapping Violation: Force unwrapping should be avoided (force_unwrapping)",
-        "make: *** [Makefile:29: lint] Error 2"
+        "Sources/nene-poker/main.swift:51:85: error: Force Unwrapping Violation: Force unwrapping should be avoided (force_unwrapping)",
+        "make: *** [Makefile:34: lint] Error 2"
       ]
     },
     {
@@ -326,14 +303,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.92 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.66 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-019 Sources/NeNePokerCore/Probe.swift:4: 期待される失敗は閉じた結果型で返す（throw / try / catch は使えない）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -352,14 +329,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.63 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (6.05 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-020 Sources/NeNePokerCore/Probe.swift:4: Any / AnyObject / AnyHashable / AnyClass は使えない",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -377,14 +354,14 @@
       ],
       "missing": [],
       "tail": [
-        "[95 / 102] NeNePokerCore",
-        "[100 / 103] NeNePokerRender",
-        "[101 / 104] NeNePokerTerminal",
-        "Build complete! (3.55 secs)",
+        "[143 / 148] nene-poker-product",
+        "[146 / 149] NeNePokerTerminal",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.68 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "Sources/NeNePokerCore/Probe.swift:4:29: error: Large Tuple Violation: Tuples should have at most 2 members (large_tuple)",
-        "make: *** [Makefile:29: lint] Error 2"
+        "make: *** [Makefile:34: lint] Error 2"
       ]
     },
     {
@@ -403,14 +380,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104]",
-        "Build complete! (3.62 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.63 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-014 Sources/NeNePokerCore/Probe.swift:3: unsafe 系の API は unsafe=allowed の target だけ",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -429,14 +406,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (4.02 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.74 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-001 Sources/NeNePokerCore/BoardHelper.swift:2: 総称名の型 BoardHelper",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -455,14 +432,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.83 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.67 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-002 Sources/NeNePokerCore/Probe.swift:5: 主要宣言が 2 個ある: Probe, Other",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -480,14 +457,14 @@
       ],
       "missing": [],
       "tail": [
-        "[96 / 103] NeNePokerCore",
-        "[100 / 103] NeNePokerTerminal",
-        "[104 / 104]",
-        "Build complete! (3.57 secs)",
+        "[143 / 148] NeNePokerTerminal",
+        "[146 / 149] NeNePokerTerminal",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.63 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "Sources/NeNePokerCore/Probe.swift:4:12: error: Function Parameter Count Violation: Function should have 4 parameters or less: it currently has 5 (function_parameter_count)",
-        "make: *** [Makefile:29: lint] Error 2"
+        "make: *** [Makefile:34: lint] Error 2"
       ]
     },
     {
@@ -505,14 +482,14 @@
       ],
       "missing": [],
       "tail": [
-        "[92 / 101] NeNePokerCore",
-        "[95 / 102] NeNePokerCore",
-        "[100 / 103] NeNePokerTerminal",
-        "Build complete! (3.67 secs)",
+        "[143 / 148] NeNePokerTerminal",
+        "[146 / 149] NeNePokerTerminal",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.75 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "Sources/NeNePokerCore/Probe.swift:4:5: error: Cyclomatic Complexity Violation: Function should have complexity 10 or less; currently complexity is 11 (cyclomatic_complexity)",
-        "make: *** [Makefile:29: lint] Error 2"
+        "make: *** [Makefile:34: lint] Error 2"
       ]
     },
     {
@@ -527,18 +504,18 @@
       "expected": "^CNF-003 Sources/nene-poker/main\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-003 Sources/nene-poker/main.swift:9: 直前行に有効な // Waiver: WVR-NNNN が無い"
+        "CNF-003 Sources/nene-poker/main.swift:51: 直前行に有効な // Waiver: WVR-NNNN が無い"
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.64 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.72 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-003 Sources/nene-poker/main.swift:9: 直前行に有効な // Waiver: WVR-NNNN が無い",
+        "CNF-003 Sources/nene-poker/main.swift:51: 直前行に有効な // Waiver: WVR-NNNN が無い",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -558,14 +535,14 @@
       ],
       "missing": [],
       "tail": [
-        "Build complete! (3.65 secs)",
+        "Build complete! (5.77 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-003 Sources/NeNePokerCore/Probe.swift:3: @available(..., deprecated) は非推奨の警告を隠す",
         "CNF-003 Sources/NeNePokerCore/Probe.swift:6: @diagnose / @warn による警告の抑制",
         "conformance: 22 規則・違反 2 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -584,14 +561,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.66 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.68 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-004 docs/waivers/WVR-0001:1: 期限切れの waiver（2026-10-24）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -610,14 +587,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.69 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.67 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-011 Tests/NeNePokerCoreTests/ProbeTests.swift:1: NeNePokerCoreTests は XCTest を import できない",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -632,20 +609,20 @@
       "expected": "^CNF-009 Package\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-009 Package.swift:8: target NeNePokerCore に .treatAllWarnings(as: .error) が無い",
-        "CNF-009 Package.swift:8: target NeNePokerCore の使えない swiftSettings: .treatAllWarnings(as: .warning)",
-        "CNF-009 Package.swift:10: 使えない manifest の指定: 警告を警告のまま残す指定"
+        "CNF-009 Package.swift:12: target NeNePokerCore に .treatAllWarnings(as: .error) が無い",
+        "CNF-009 Package.swift:12: target NeNePokerCore の使えない swiftSettings: .treatAllWarnings(as: .warning)",
+        "CNF-009 Package.swift:14: 使えない manifest の指定: 警告を警告のまま残す指定"
       ],
       "missing": [],
       "tail": [
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-009 Package.swift:8: target NeNePokerCore に .treatAllWarnings(as: .error) が無い",
-        "CNF-009 Package.swift:8: target NeNePokerCore の使えない swiftSettings: .treatAllWarnings(as: .warning)",
-        "CNF-009 Package.swift:10: 使えない manifest の指定: 警告を警告のまま残す指定",
+        "CNF-009 Package.swift:12: target NeNePokerCore に .treatAllWarnings(as: .error) が無い",
+        "CNF-009 Package.swift:12: target NeNePokerCore の使えない swiftSettings: .treatAllWarnings(as: .warning)",
+        "CNF-009 Package.swift:14: 使えない manifest の指定: 警告を警告のまま残す指定",
         "conformance: 22 規則・違反 3 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -664,12 +641,12 @@
       ],
       "missing": [],
       "tail": [
-        "6 |         return 2",
         "7 |     }",
         "",
         "[#NoUsage]: <https://docs.swift.org/compiler/documentation/diagnostics/no-usage>",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandStrength.swift -primary-file Sources/NeNePokerCore/Probe.swift Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift Sources/NeNePokerCore/Square.swift Sources/NeNePokerCore/Suit.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P24-cd_2unek -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P24-cd_2unek -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -index-store-path .build/out -index-system-modules",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNePokerCore/Action.swift Sources/NeNePokerCore/ActionRejection.swift Sources/NeNePokerCore/Bets.swift Sources/NeNePokerCore/BlindLevel.swift Sources/NeNePokerCore/BlindSchedule.swift Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/Hand+Betting.swift Sources/NeNePokerCore/Hand+Flow.swift Sources/NeNePokerCore/Hand.swift Sources/NeNePokerCore/HandApplyOutcome.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEnding.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandProgress.swift Sources/NeNePokerCore/HandResult.swift Sources/NeNePokerCore/HandStrength.swift Sources/NeNePokerCore/LegalActions.swift Sources/NeNePokerCore/PotAward.swift Sources/NeNePokerCore/PotDivision.swift Sources/NeNePokerCore/PotLayer.swift Sources/NeNePokerCore/PotStakes.swift -primary-file Sources/NeNePokerCore/Probe.swift -primary-file Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift Sources/NeNePokerCore/Seat.swift Sources/NeNePokerCore/SeatStatus.swift Sources/NeNePokerCore/Seating.swift Sources/NeNePokerCore/Street.swift Sources/NeNePokerCore/Suit.swift Sources/NeNePokerCore/Table.swift Sources/NeNePokerCore/TableRules.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.dia -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P24-ll_i8b_6 -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P24-ll_i8b_6 -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/too[74 / 105] NeNePokerEngine",
+        "lchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.o -index-store-path .build/out -index-system-modules",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -690,14 +667,14 @@
       ],
       "missing": [],
       "tail": [
-        "[100 / 103] NeNePokerTerminal",
-        "Build complete! (3.48 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.67 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-005 swiftlint-baseline.json:1: 名前に baseline を含むファイル",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -716,14 +693,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.75 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.68 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-005 .gitignore:2: 検査の対象から外れる無視の指定 'Sources/NeNePokerCore/Hidden.swift'（生成物の置き場だけを無視する）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -737,18 +714,18 @@
       "expected": "\\[Indentation\\]",
       "verdict": "pass",
       "evidence": [
-        "Sources/NeNePokerRender/Cell.swift:3:1: error: [Indentation] indent by 2 spaces"
+        "Sources/NeNePokerRender/Cell.swift:5:1: error: [Indentation] indent by 2 spaces"
       ],
       "missing": [],
       "tail": [
-        "[92 / 100] NeNePokerCore",
-        "[96 / 101] NeNePokerRender",
-        "[99 / 102] NeNePokerTerminal",
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.92 secs)",
+        "[142 / 148] nene-poker-product",
+        "[143 / 148] nene-poker-product",
+        "[146 / 149] NeNePokerTerminal",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.59 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
-        "Sources/NeNePokerRender/Cell.swift:3:1: error: [Indentation] indent by 2 spaces",
-        "make: *** [Makefile:26: format] Error 123"
+        "Sources/NeNePokerRender/Cell.swift:5:1: error: [Indentation] indent by 2 spaces",
+        "make: *** [Makefile:31: format] Error 123"
       ]
     },
     {
@@ -767,14 +744,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.53 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.87 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-007 Sources/NeNePokerCore/.swiftlint.yml:1: ゲートが読まない場所の検査設定（入れ子の設定は道具が勝手に拾う）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -793,14 +770,14 @@
       ],
       "missing": [],
       "tail": [
-        "[97 / 102] NeNePokerCore",
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.51 secs)",
+        "[146 / 149] NeNePokerTerminal",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.97 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "warning: Skipping enabled rule 'statement_position' because it requires SourceKit and SourceKit access is prohibited.",
         "lint: 有効にした規則が実行されていない（CNF-007）",
-        "make: *** [Makefile:29: lint] Error 1"
+        "make: *** [Makefile:34: lint] Error 1"
       ]
     },
     {
@@ -814,18 +791,18 @@
       "expected": "^CNF-006 docs/todo/current\\.md",
       "verdict": "pass",
       "evidence": [
-        "CNF-006 docs/todo/current.md:29: 未定義の規則 ID ARC-099"
+        "CNF-006 docs/todo/current.md:34: 未定義の規則 ID ARC-099"
       ],
       "missing": [],
       "tail": [
-        "[102 / 103] NeNePokerTerminal",
-        "Build complete! (3.58 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.58 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-006 docs/todo/current.md:29: 未定義の規則 ID ARC-099",
+        "CNF-006 docs/todo/current.md:34: 未定義の規則 ID ARC-099",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -843,14 +820,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.54 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.65 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-006 docs/QUALITY_GATES.md:1: active の QLT-008 に gate-proofs の証明行（| QLT-008 |）が無い",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -868,14 +845,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.73 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.71 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-006 docs/quality/gate-proofs.md:1: active の CNF-015 の証明行に実測が書かれていない（空の行は証明ではない）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -886,21 +863,21 @@
       "violation": "Issue 番号の無い作業メモ（TODO）を書く",
       "command": "make check",
       "exit": 2,
-      "expected": "^CNF-008 Sources/NeNePokerCore/Square\\.swift",
+      "expected": "^CNF-008 Sources/NeNePokerCore/Card\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-008 Sources/NeNePokerCore/Square.swift:1: TODO / FIXME の直後に (#Issue番号) が無い"
+        "CNF-008 Sources/NeNePokerCore/Card.swift:1: TODO / FIXME の直後に (#Issue番号) が無い"
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.52 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.60 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-008 Sources/NeNePokerCore/Square.swift:1: TODO / FIXME の直後に (#Issue番号) が無い",
+        "CNF-008 Sources/NeNePokerCore/Card.swift:1: TODO / FIXME の直後に (#Issue番号) が無い",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -915,14 +892,14 @@
       "expected": "^CNF-009 Package\\.swift:\\d+: 許可リストに無い外部パッケージ",
       "verdict": "pass",
       "evidence": [
-        "CNF-009 Package.swift:7: 許可リストに無い外部パッケージ"
+        "CNF-009 Package.swift:11: 許可リストに無い外部パッケージ"
       ],
       "missing": [],
       "tail": [
         "python3 eng/conformance.py",
-        "CNF-009 Package.swift:7: 許可リストに無い外部パッケージ",
+        "CNF-009 Package.swift:11: 許可リストに無い外部パッケージ",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -936,13 +913,13 @@
       "expected": "(FAILED|did NOT match)",
       "verdict": "pass",
       "evidence": [
-        "/tmp/tmp.fdNf5NLZUJ/swiftlint_linux_amd64.zip: FAILED",
+        "/tmp/tmp.S9ksPzKg3E/swiftlint_linux_amd64.zip: FAILED",
         "sha256sum: WARNING: 1 computed checksum did NOT match"
       ],
       "missing": [],
       "tail": [
         "eng/install-tools.sh",
-        "/tmp/tmp.fdNf5NLZUJ/swiftlint_linux_amd64.zip: FAILED",
+        "/tmp/tmp.S9ksPzKg3E/swiftlint_linux_amd64.zip: FAILED",
         "sha256sum: WARNING: 1 computed checksum did NOT match",
         "make: *** [Makefile:16: tools] Error 1"
       ]
@@ -964,14 +941,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.62 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.73 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-018 .github/workflows/ci.yml:30: CI で許す run はツールチェーン導入とゲートの 1 行だけ: swift build",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -989,14 +966,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103] AllExcludingTests",
-        "Build complete! (3.50 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.76 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-018 .github/workflows/ci.yml:19: アクションを commit SHA で固定していない: actions/checkout@v7",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1015,14 +992,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.88 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.91 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-018 .github/workflows/ci.yml:16: if: は使えない（スキップされた必須 check は成功として数えられる）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1064,10 +1041,10 @@
         "AssertionError: 'CNF-013' not found in [] : CNF-013 が Sources/Core/Board.swift で発火しない",
         "",
         "----------------------------------------------------------------------",
-        "Ran 101 tests in 0.282s",
+        "Ran 101 tests in 0.262s",
         "",
         "FAILED (failures=1)",
-        "make: *** [Makefile:35: conformance-test] Error 1"
+        "make: *** [Makefile:40: conformance-test] Error 1"
       ]
     },
     {
@@ -1085,14 +1062,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.87 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.72 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-015 Sources/NeNePokerCore/Probe.swift:2: Codable / Decodable / Encodable は使えない",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1111,14 +1088,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104]",
-        "Build complete! (3.63 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.69 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-017 Sources/NeNePokerCore/Probe.swift:5: print / readLine / exit 等は合成ルートだけ",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1132,18 +1109,18 @@
       "expected": "GIT-003 [0-9a-f]{7}: 件名は",
       "verdict": "pass",
       "evidence": [
-        "GIT-003 4ad5ee4: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）"
+        "GIT-003 1c1f335: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）"
       ],
       "missing": [],
       "tail": [
         "python3 eng/validate-commit-message.py --range \"origin/main..HEAD\"",
-        "commits: 2 件・違反 1 件",
+        "commits: 3 件・違反 1 件",
         "----------------------------------------------------------------------",
-        "Ran 101 tests in 0.264s",
+        "Ran 101 tests in 0.263s",
         "",
         "OK",
-        "GIT-003 4ad5ee4: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）",
-        "make: *** [Makefile:38: commits] Error 1"
+        "GIT-003 1c1f335: 件名は `<type>(<scope>): <日本語の説明> (#<issue番号>)` の形（type は feat / fix / docs / refactor / test / build / ci / chore）",
+        "make: *** [Makefile:43: commits] Error 1"
       ]
     },
     {
@@ -1188,7 +1165,7 @@
         "Sources/NeNePokerCore/Probe.swift:548:29: error: Large Tuple Violation: Tuples should have at most 2 members (large_tuple)",
         "Sources/NeNePokerCore/Probe.swift:570:9: error: Nesting Violation: Types should be nested at most 1 level deep (nesting)",
         "Sources/NeNePokerCore/Probe.swift:2:1: error: Type Body Length Violation: Enum body should span 300 lines or less excluding comments and whitespace: currently spans 550 lines (type_body_length)",
-        "make: *** [Makefile:29: lint] Error 2"
+        "make: *** [Makefile:34: lint] Error 2"
       ]
     },
     {
@@ -1206,14 +1183,39 @@
       ],
       "missing": [],
       "tail": [
-        "[90 / 99] NeNePokerCore",
-        "[92 / 100] NeNePokerCore",
-        "[94 / 101] NeNePokerCore",
-        "[99 / 102] NeNePokerTerminal",
-        "[103 / 103] nene-poker-product",
-        "Build complete! (3.80 secs)",
+        "[142 / 148] NeNePokerTerminal",
+        "[143 / 148] NeNePokerTerminal",
+        "[143 / 148] nene-poker-product",
+        "[146 / 149] NeNePokerTerminal",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.77 secs)",
         "swift-strict: SwiftPM かコンパイラが警告を出した（QLT-002）",
         "make: *** [Makefile:19: build] Error 1"
+      ]
+    },
+    {
+      "id": "P49",
+      "rules": [
+        "QLT-001"
+      ],
+      "violation": "端末を戻す列からカーソル表示と alternate screen の終了を消す（make smoke が実際に端末の復元を見て落ちること）",
+      "command": "make check",
+      "exit": 2,
+      "expected": "smoke: NG  q: 最後に端末を戻す",
+      "verdict": "pass",
+      "evidence": [
+        "smoke: NG  q: 最後に端末を戻す（カーソルを出し alternate screen を抜ける）"
+      ],
+      "missing": [],
+      "tail": [
+        "smoke: ok  間違った起動オプションは exit 2 で理由を 1 行",
+        "smoke: ok  端末の外からは exit 1 で理由を 1 行",
+        "smoke: 失敗 5 件",
+        "----------------------------------------------------------------------",
+        "Ran 101 tests in 0.264s",
+        "",
+        "OK",
+        "make: *** [Makefile:28: smoke] Error 1"
       ]
     },
     {
@@ -1228,15 +1230,15 @@
       "verdict": "pass",
       "evidence": [
         "✘ Test everySevenCardHandIsCountedLikeThePublishedTable() recorded an issue at HandCountTests.swift:20:13: Expectation failed: tally.counts[expected.category.rawValue] == expected.count",
-        "✘ Test everySevenCardHandIsCountedLikeThePublishedTable() failed after 3.677 seconds with 1 issue."
+        "✘ Test everySevenCardHandIsCountedLikeThePublishedTable() failed after 3.640 seconds with 1 issue."
       ],
       "missing": [],
       "tail": [
-        "✘ Test run with 18 tests in 4 suites failed after 3.677 seconds with 1 issue.",
+        "✘ Test run with 40 tests in 7 suites failed after 3.640 seconds with 1 issue.",
         "Note: Some test targets reported failures:",
         "  - NeNePokerCoreTests (Swift Testing)",
         "----------------------------------------------------------------------",
-        "Ran 101 tests in 0.264s",
+        "Ran 101 tests in 0.266s",
         "",
         "OK",
         "make: *** [Makefile:23: test] Error 1"
@@ -1263,7 +1265,7 @@
         " 6 |         case \"a\":",
         " 7 |             return 1",
         "Failed frontend command:",
-        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandStrength.swift -primary-file Sources/NeNePokerCore/Probe.swift Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift Sources/NeNePokerCore/Square.swift Sources/NeNePokerCore/Suit.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P50-b8vp25gs -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P50-b8vp25gs -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -index-store-path .build/out -index-system-modules",
+        "/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-frontend -frontend -c Sources/NeNePokerCore/Action.swift Sources/NeNePokerCore/ActionRejection.swift Sources/NeNePokerCore/Bets.swift Sources/NeNePokerCore/BlindLevel.swift Sources/NeNePokerCore/BlindSchedule.swift Sources/NeNePokerCore/Card.swift Sources/NeNePokerCore/CardDecodeOutcome.swift Sources/NeNePokerCore/CardDecodeRejection.swift Sources/NeNePokerCore/CardNotation.swift Sources/NeNePokerCore/CardSet.swift Sources/NeNePokerCore/Deck.swift Sources/NeNePokerCore/Hand+Betting.swift Sources/NeNePokerCore/Hand+Flow.swift Sources/NeNePokerCore/Hand.swift Sources/NeNePokerCore/HandApplyOutcome.swift Sources/NeNePokerCore/HandCategory.swift Sources/NeNePokerCore/HandEnding.swift Sources/NeNePokerCore/HandEvaluator.swift Sources/NeNePokerCore/HandProgress.swift Sources/NeNePokerCore/HandResult.swift Sources/NeNePokerCore/HandStrength.swift Sources/NeNePokerCore/LegalActions.swift Sources/NeNePokerCore/PotAward.swift Sources/NeNePokerCore/PotDivision.swift Sources/NeNePokerCore/PotLayer.swift Sources/NeNePokerCore/PotStakes.swift -primary-file Sources/NeNePokerCore/Probe.swift -primary-file Sources/NeNePokerCore/Rank.swift Sources/NeNePokerCore/RankGroups.swift Sources/NeNePokerCore/Seat.swift Sources/NeNePokerCore/SeatStatus.swift Sources/NeNePokerCore/Seating.swift Sources/NeNePokerCore/Street.swift Sources/NeNePokerCore/Suit.swift Sources/NeNePokerCore/Table.swift Sources/NeNePokerCore/TableRules.swift -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.dia -emit-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.d -emit-const-values-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.swiftconstvalues -emit-reference-dependencies-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.swiftdeps -serialize-diagnostics-path .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.dia -target x86_64-unknown-linux-gnu -disable-objc-interop -I .build/out/Products/Debug-linux-x86_64 -module-cache-path .build/out/ModuleCache.noindex -no-color-diagnostics -Xcc -fno-color-diagnostics -enable-testing -g -debug-info-format\\=dwarf -dwarf-version\\=4 -warnings-as-errors -warnings-as-errors -swift-version 6 -Onone -D SWIFT_PACKAGE -D DEBUG -D SWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE -D Xcode -serialize-debugging-options -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -empty-abi-descriptor -external-plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins/testing\\#/root/.local/share/swiftly/toolchains/6.4.1/usr/bin/swift-plugin-server -validate-clang-modules-once -clang-build-session-file .build/out/ModuleCache.noindex/Session.modulevalidation -Xcc -working-directory -Xcc /tmp/poker-proof-P50-gx9mnhvy -enable-anonymous-context-mangled-names -file-compilation-dir /tmp/poker-proof-P50-gx9mnhvy -Xcc -fno-omit-frame-pointer -Xcc -D_LIBCPP_HARDENING_MODE\\=_LIBCPP_HARDENING_MODE_DEBUG -Xcc -fmodules-prune-interval\\=86400 -Xcc -fmodules-prune-after\\=345600 -Xcc -I.build/out/Products/Debug-linux-x86_64/include -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources-normal/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources/x86_64 -Xcc -I.build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/DerivedSources -Xcc -DSWIFT_PACKAGE -Xcc -DDEBUG\\=1 -no-auto-bridging-header-chaining -module-name NeNePokerCore -package-name repo -const-gather-protocols-file .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/NeNePokerCore_const_extract_protocols.json -in-process-plugin-server-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/libSwiftInProcPluginServer.so -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/lib/swift/host/plugins -plugin-path /root/.local/share/swiftly/toolchains/6.4.1/usr/local/lib/swift/host/plugins -parse-as-library -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -o .build/out/Intermediates.noindex/NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Probe.o -index-unit-output-path /NeNePoker.build/Debug-linux-x86_64/NeNePokerCore-t.build/Objects-normal/x86_64/Rank.o -index-store-path .build/out -index-system-modules",
         "error: Build failed",
         "make: *** [Makefile:19: build] Error 1"
       ]
@@ -1284,14 +1286,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104]",
-        "Build complete! (3.48 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.69 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-013 Sources/NeNePokerCore/Side.swift:15: 全捕捉（default / @unknown default / case _ / case let x / 括弧や並びに隠れた _ と束縛）は網羅性検査を殺す",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1310,14 +1312,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.74 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (6.14 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-013 Sources/NeNePokerCore/Side.swift:15: 全捕捉（default / @unknown default / case _ / case let x / 括弧や並びに隠れた _ と束縛）は網羅性検査を殺す",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1336,14 +1338,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104]",
-        "Build complete! (3.47 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.69 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-013 Sources/NeNePokerCore/Pair.swift:11: 全捕捉（default / @unknown default / case _ / case let x / 括弧や並びに隠れた _ と束縛）は網羅性検査を殺す",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1352,24 +1354,24 @@
         "SWF-007",
         "CNF-021"
       ],
-      "violation": "別ファイルの extension に init を足し、private init を経ずに Square を作る（M4-f）",
+      "violation": "別ファイルの extension に init を足し、private init を経ずに BlindLevel を作る（M4-f）",
       "command": "make check",
       "exit": 2,
-      "expected": "^CNF-021 Sources/NeNePokerCore/Square\\+Bypass\\.swift",
+      "expected": "^CNF-021 Sources/NeNePokerCore/BlindLevel\\+Bypass\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-021 Sources/NeNePokerCore/Square+Bypass.swift:3: extension に init を書かない（型の本体の唯一のファクトリを迂回できる）"
+        "CNF-021 Sources/NeNePokerCore/BlindLevel+Bypass.swift:3: extension に init を書かない（型の本体の唯一のファクトリを迂回できる）"
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.70 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.68 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-021 Sources/NeNePokerCore/Square+Bypass.swift:3: extension に init を書かない（型の本体の唯一のファクトリを迂回できる）",
+        "CNF-021 Sources/NeNePokerCore/BlindLevel+Bypass.swift:3: extension に init を書かない（型の本体の唯一のファクトリを迂回できる）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1388,14 +1390,14 @@
       ],
       "missing": [],
       "tail": [
-        "[104 / 104] nene-poker-product",
-        "Build complete! (3.89 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.88 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-022 Sources/NeNePokerCore/Probe.swift:4: async / await / Task / actor / Thread / Dispatch は使えない（並行の形は合成ルートの 1 本のループだけ）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1408,17 +1410,17 @@
       "violation": "Terminal で @preconcurrency import を書く（並行性の error を戻らない warning に下げる・M7-i）",
       "command": "make conformance",
       "exit": 2,
-      "expected": "^CNF-014 Sources/NeNePokerTerminal/Screen\\.swift",
+      "expected": "^CNF-014 Sources/NeNePokerTerminal/Console\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-014 Sources/NeNePokerTerminal/Screen.swift:1: リフレクション・下線付き属性・@preconcurrency・マクロ・動的呼び出しは使えない"
+        "CNF-014 Sources/NeNePokerTerminal/Console.swift:1: リフレクション・下線付き属性・@preconcurrency・マクロ・動的呼び出しは使えない"
       ],
       "missing": [],
       "tail": [
         "python3 eng/conformance.py",
-        "CNF-014 Sources/NeNePokerTerminal/Screen.swift:1: リフレクション・下線付き属性・@preconcurrency・マクロ・動的呼び出しは使えない",
+        "CNF-014 Sources/NeNePokerTerminal/Console.swift:1: リフレクション・下線付き属性・@preconcurrency・マクロ・動的呼び出しは使えない",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1438,14 +1440,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 103] AllExcludingTests",
-        "Build complete! (4.30 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.95 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-005 .swift-format:1: swift-format の設定 rules は使えない（規則の無効化はリポジトリ全体の抑制になる・M8-j）",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1458,21 +1460,21 @@
       "violation": "Terminal が宣言していない推移的な依存の Core を import する（SwiftPM は拒まない・M6-e）",
       "command": "make check",
       "exit": 2,
-      "expected": "^CNF-011 Sources/NeNePokerTerminal/Screen\\.swift",
+      "expected": "^CNF-011 Sources/NeNePokerTerminal/Console\\.swift",
       "verdict": "pass",
       "evidence": [
-        "CNF-011 Sources/NeNePokerTerminal/Screen.swift:2: NeNePokerTerminal は NeNePokerCore を import できない"
+        "CNF-011 Sources/NeNePokerTerminal/Console.swift:2: NeNePokerTerminal は NeNePokerCore を import できない"
       ],
       "missing": [],
       "tail": [
-        "[103 / 103]",
-        "Build complete! (3.70 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (5.64 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
-        "CNF-011 Sources/NeNePokerTerminal/Screen.swift:2: NeNePokerTerminal は NeNePokerCore を import できない",
+        "CNF-011 Sources/NeNePokerTerminal/Console.swift:2: NeNePokerTerminal は NeNePokerCore を import できない",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1493,14 +1495,14 @@
       ],
       "missing": [],
       "tail": [
-        "[103 / 104] NeNePokerTerminal",
-        "Build complete! (4.52 secs)",
+        "[150 / 150] nene-poker-product",
+        "Build complete! (6.21 secs)",
         "eng/swift-sources.sh | xargs -0 swift-format lint --strict --configuration .swift-format",
         "eng/lint.sh .tools/swiftlint --config .swiftlint.yml",
         "python3 eng/conformance.py",
         "CNF-011 Sources/NeNePokerCore/Probe.swift:1: NeNePokerCore は FoundationEssentials を import できない",
         "conformance: 22 規則・違反 1 件",
-        "make: *** [Makefile:32: conformance] Error 1"
+        "make: *** [Makefile:37: conformance] Error 1"
       ]
     },
     {
@@ -1522,10 +1524,10 @@
         "AssertionError: 'CNF-013' not found in [] : CNF-013 が Sources/Core/Board.swift で発火しない",
         "",
         "----------------------------------------------------------------------",
-        "Ran 101 tests in 0.257s",
+        "Ran 101 tests in 0.263s",
         "",
         "FAILED (failures=8)",
-        "make: *** [Makefile:35: conformance-test] Error 1"
+        "make: *** [Makefile:40: conformance-test] Error 1"
       ]
     },
     {

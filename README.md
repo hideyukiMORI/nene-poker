@@ -6,9 +6,10 @@ Written in Swift for Ubuntu on WSL2 and Windows Terminal. The rules, the hand ev
 It is a sibling of [NeNe Gambit](https://github.com/hideyukiMORI/nene-gambit) (chess), [NeNe Reversi](https://github.com/hideyukiMORI/nene-reversi)
 and [NeNe Igo](https://github.com/hideyukiMORI/nene-igo) (Go). The chips are imaginary points; nothing here involves money.
 
-🚧 **Nothing is drawn yet.** The cards and the hand evaluator are in place: over all 2,598,960 five-card hands and all 133,784,560 seven-card hands,
-the count of every hand category matches the published tables. The table rules (blinds, minimum raises, short all-ins, side pots, split pots and odd chips, heads-up) follow Robert's Rules of Poker, version 11.
-The screen comes next.
+🚧 **Work in progress.** The table is drawn (112 x 28) with four players who still pick random legal actions; `v` switches between showing only your
+cards and showing everyone's, `q` quits. The cards and the hand evaluator are in place: over all 2,598,960 five-card hands and all 133,784,560
+seven-card hands, the count of every hand category matches the published tables. The table rules (blinds, minimum raises, short all-ins, side pots, split pots and odd chips, heads-up) follow Robert's Rules of Poker, version 11.
+The AI comes next.
 
 ## Development
 

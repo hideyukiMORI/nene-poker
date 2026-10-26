@@ -51,9 +51,7 @@ extension Hand {
                 shown[seat] = HandEvaluator.strength(of: CardSet.of(holes[seat.rawValue] + boardCards))
             }
         }
-        let contributions = Dictionary(uniqueKeysWithValues: Seat.allCases.map { ($0, totals[$0.rawValue]) })
-        let awards = PotDivision.divide(
-            contributions: contributions, contenders: contenders, strengths: shown, button: button)
+        let awards = PotDivision.divide(stakes, strengths: shown, button: button)
         var final = Dictionary(uniqueKeysWithValues: Seat.allCases.map { ($0, stacks[$0.rawValue]) })
         for award in awards {
             for (winner, share) in zip(award.winners, award.shares) {

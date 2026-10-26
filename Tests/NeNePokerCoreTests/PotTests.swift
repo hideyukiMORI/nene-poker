@@ -42,46 +42,62 @@ import Testing
     }
 
     @Test func aFoldedPlayersChipsStayInThePotButTheyCannotWinIt() {
+        let stakes = PotTests.stakes([.south: 50, .west: 200, .north: 200], contenders: [.west, .north], allIn: [])
         let awards = PotDivision.divide(
-            contributions: [.south: 50, .west: 200, .north: 200, .east: 0], contenders: [.west, .north],
-            strengths: [.west: PotTests.strength(.pair), .north: PotTests.strength(.high)], button: .south)
+            stakes, strengths: [.west: PotTests.strength(.pair), .north: PotTests.strength(.high)], button: .south)
         #expect(awards.map(\.amount) == [450])
         #expect(awards.map(\.winners) == [[.west]])
     }
 
+    /// 賭けの途中で額がそろっていなくても、オールインが無ければポットは 1 つ（ブラインドだけでサイドポットを作らない）。
+    @Test func unmatchedBetsWithoutAnAllInMakeOnePot() {
+        let stakes = PotTests.stakes([.west: 10, .north: 20], contenders: Set(Seat.allCases), allIn: [])
+        #expect(
+            PotDivision.layers(stakes, button: .south) == [
+                PotLayer(amount: 30, contenders: [.west, .north, .east, .south])
+            ])
+        let short = PotTests.stakes(
+            [.west: 10, .north: 15, .east: 60], contenders: Set(Seat.allCases), allIn: [.north])
+        #expect(PotDivision.layers(short, button: .south).map(\.amount) == [40, 45])
+        #expect(PotDivision.layers(short, button: .south)[1].contenders == [.west, .east, .south])
+    }
+
     /// Robert's Rules の Ties の 5(a): 割り切れないチップは、親から時計回りで最初の手が受け取る。
     @Test func aSplitGivesTheOddChipToTheFirstWinnerClockwiseFromTheButton() {
+        let pair = PotTests.strength(.pair)
+        let high = PotTests.strength(.high)
         let awards = PotDivision.divide(
-            contributions: [.south: 101, .west: 100, .north: 100, .east: 0], contenders: [.south, .west, .north],
-            strengths: [
-                .south: PotTests.strength(.high), .west: PotTests.strength(.pair), .north: PotTests.strength(.pair),
-            ],
-            button: .west)
+            PotTests.stakes(
+                [.south: 101, .west: 100, .north: 100], contenders: [.south, .west, .north], allIn: [.west, .north]),
+            strengths: [.south: high, .west: pair, .north: pair], button: .west)
         #expect(awards.map(\.amount) == [300, 1])
         #expect(awards[0].winners == [.north, .west])
         #expect(awards[0].shares == [150, 150])
         #expect(awards[1].winners == [.south])
         let odd = PotDivision.divide(
-            contributions: [.south: 0, .west: 101, .north: 100, .east: 100], contenders: [.west, .north, .east],
-            strengths: [
-                .west: PotTests.strength(.pair), .north: PotTests.strength(.pair), .east: PotTests.strength(.pair),
-            ],
-            button: .north)
+            PotTests.stakes(
+                [.west: 101, .north: 100, .east: 100], contenders: [.west, .north, .east], allIn: [.north, .east]),
+            strengths: [.west: pair, .north: pair, .east: pair], button: .north)
         #expect(odd.map(\.amount) == [300, 1])
         #expect(odd[0].winners == [.east, .west, .north])
         #expect(odd[0].shares == [100, 100, 100])
         let two = PotDivision.divide(
-            contributions: [.south: 51, .west: 50, .north: 0, .east: 0], contenders: [.south, .west],
-            strengths: [.south: PotTests.strength(.pair), .west: PotTests.strength(.pair)], button: .west)
+            PotTests.stakes([.south: 51, .west: 50], contenders: [.south, .west], allIn: [.west]),
+            strengths: [.south: pair, .west: pair], button: .west)
         #expect(two.map(\.amount) == [100, 1])
         let threeWay = PotDivision.divide(
-            contributions: [.south: 0, .west: 67, .north: 67, .east: 67], contenders: [.west, .north, .east],
-            strengths: [
-                .west: PotTests.strength(.pair), .north: PotTests.strength(.pair), .east: PotTests.strength(.high),
-            ],
-            button: .west)
+            PotTests.stakes([.west: 67, .north: 67, .east: 67], contenders: [.west, .north, .east], allIn: []),
+            strengths: [.west: pair, .north: pair, .east: high], button: .west)
         #expect(threeWay[0].winners == [.north, .west])
         #expect(threeWay[0].shares == [101, 100])
+    }
+
+    private static func stakes(_ contributions: [Seat: Int], contenders: Set<Seat>, allIn: Set<Seat>) -> PotStakes {
+        var all = contributions
+        for seat in Seat.allCases where all[seat] == nil {
+            all[seat] = 0
+        }
+        return PotStakes(contributions: all, contenders: contenders, allIn: allIn)
     }
 
     @Test func aSplitAtShowdownDividesEqualHandsAndIgnoresSuits() throws {

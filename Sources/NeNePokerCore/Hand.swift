@@ -125,6 +125,19 @@ public struct Hand: Sendable, Hashable {
         totals.reduce(0, +)
     }
 
+    /// いまのポットの段（メインとサイド）。降りた人の分も入り、争えるのは降りていない席。
+    public var potLayers: [PotLayer] {
+        PotDivision.layers(stakes, button: button)
+    }
+
+    /// ポットを作るのに要る値（各席の出した額・争える席・オールインした席）。
+    var stakes: PotStakes {
+        let contributions = Dictionary(uniqueKeysWithValues: Seat.allCases.map { ($0, totals[$0.rawValue]) })
+        let contenders = Set(Seat.allCases.filter { [.active, .allIn].contains(statuses[$0.rawValue]) })
+        let allIn = Set(Seat.allCases.filter { statuses[$0.rawValue] == .allIn })
+        return PotStakes(contributions: contributions, contenders: contenders, allIn: allIn)
+    }
+
     /// ブラインドを出す。足りなければ全部を出してオールインになる。
     private mutating func post(_ blind: Int, from seat: Seat) {
         let paid = min(blind, stacks[seat.rawValue])
