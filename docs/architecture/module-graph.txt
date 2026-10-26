@@ -7,7 +7,7 @@
 NeNePokerCore          kind=library     deps=
 NeNePokerEngine        kind=library     deps=NeNePokerCore
 NeNePokerRender        kind=library     deps=NeNePokerCore,NeNePokerEngine
-NeNePokerTerminal      kind=library     deps=NeNePokerRender                                       std=Glibc unsafe=allowed
+NeNePokerTerminal      kind=library     deps=NeNePokerRender                                       std=Glibc,Synchronization unsafe=allowed
 nene-poker             kind=executable  deps=NeNePokerCore,NeNePokerEngine,NeNePokerRender,NeNePokerTerminal std=Glibc role=composition-root
 
 NeNePokerCoreTests     kind=test        deps=NeNePokerCore                                         std=Testing

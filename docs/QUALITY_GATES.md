@@ -248,7 +248,8 @@ CNF-006 が「本文に定義があるのにここに行が無い」「本文と
 | `conformance` | NeNe Poker 固有・API 単位の禁止・アーキテクチャ・文書整合 | `python3 eng/conformance.py` |
 | `conformance-test` | 規約検査の正例・反例 | `python3 -m unittest discover -s eng/tests` |
 | `commits` | コミットの形 | `eng/validate-commit-message.py --range $(BASE)..HEAD` |
-| `test` | 振る舞い | `eng/swift-strict.sh swift test -c release`（Core のテスト。5 枚と 7 枚の全数の役の数が公表値と一致・ADR 0006） |
+| `test` | 振る舞い | `eng/swift-strict.sh swift test -c release`（5 枚と 7 枚の全数の役の数が公表値と一致・卓のルール・卓の列・画面・端末の単体テスト・ADR 0006〜0009） |
+| `smoke` | 端末の復元と画面 | 実行ファイルを疑似端末で動かす `eng/smoke-terminal.py`（`q`・Ctrl+C・SIGTERM・SIGSEGV・大きさの変化・`v`・ASCII の枠への退避・ADR 0009） |
 | カバレッジ | 中核の検証密度 | **まだ無い**（QLT-009） |
 | 依存 | 再現性 | 外部依存 0。CNF-009 が許可リスト外を拒否 |
 

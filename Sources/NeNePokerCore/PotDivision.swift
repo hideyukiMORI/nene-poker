@@ -11,21 +11,29 @@ public enum PotDivision {
         -> [PotAward]
     {
         let order = button.clockwiseFromNext
+        return layers(contributions: contributions, contenders: contenders, button: button).map { layer in
+            award(amount: layer.amount, contenders: layer.contenders, strengths, order)
+        }
+    }
+
+    /// 出した額の段ごとのポット（メインが先・サイドが後）。同じ顔ぶれの段はまとめ、争える席の無い段は 1 つ下の段に足す。
+    /// ハンドの途中でも使う（画面の `POT 360 + SIDE 120`）。
+    public static func layers(contributions: [Seat: Int], contenders: Set<Seat>, button: Seat) -> [PotLayer] {
+        let order = button.clockwiseFromNext
         let levels = Array(Set(contributions.values.filter { $0 > 0 })).sorted()
-        var awards: [PotAward] = []
+        var layers: [PotLayer] = []
         var previous = 0
         for level in levels {
             let amount = contributions.values.reduce(0) { $0 + min($1, level) - min($1, previous) }
             let eligible = order.filter { contenders.contains($0) && contributions[$0, default: 0] >= level }
             previous = level
-            if let last = awards.last, last.contenders == eligible || eligible.isEmpty {
-                awards[awards.count - 1] = award(
-                    amount: last.amount + amount, contenders: last.contenders, strengths, order)
+            if let last = layers.last, last.contenders == eligible || eligible.isEmpty {
+                layers[layers.count - 1] = PotLayer(amount: last.amount + amount, contenders: last.contenders)
             } else {
-                awards.append(award(amount: amount, contenders: eligible, strengths, order))
+                layers.append(PotLayer(amount: amount, contenders: eligible))
             }
         }
-        return awards
+        return layers
     }
 
     /// 1 つのポットを、争える席のうちいちばん強い役の席で分ける。

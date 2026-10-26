@@ -11,7 +11,7 @@
 ## 1. 承認されたモジュール
 
 空の「将来用 target」を作らない。下の一覧は「承認された形」で、`Package.swift` にあるのは責務が生じた target だけである（ADR 0004）。
-2026-10-26 時点で `NeNePokerCore` とそのテスト target が入っている（Issue #3）。
+2026-10-26 時点で 5 つの target とそれぞれのテスト target がすべて入っている（Core は Issue #3、ほかは Issue #7）。
 各 target は最初の具体的な責務が生じた PR で足す（Phase 3-1 で `NeNePokerCore` とそのテストが最初に入る）。
 
 ```text
@@ -43,7 +43,7 @@ NeNePokerCore
 NeNePokerCore      -> （無し）
 NeNePokerEngine    -> NeNePokerCore
 NeNePokerRender    -> NeNePokerCore, NeNePokerEngine
-NeNePokerTerminal  -> NeNePokerRender                         ＋ 標準モジュール Glibc
+NeNePokerTerminal  -> NeNePokerRender                         ＋ 標準モジュール Glibc・Synchronization（ADR 0009）
 nene-poker         -> 上の 4 つすべて（明示的な合成のためだけに） ＋ 標準モジュール Glibc
 ```
 
