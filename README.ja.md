@@ -35,6 +35,16 @@ curl -fsSL https://raw.githubusercontent.com/hideyukiMORI/nene-poker/main/instal
 - Swift は要りません。Swift の標準ライブラリを静的にリンクした 1 つのファイルで、動的な依存は libc・libm・libstdc++・libgcc_s だけです
 - 消すとき: `rm ~/.local/bin/nene-poker`
 
+**PowerShell から**（Windows・WSL が入っていること）:
+
+```powershell
+irm https://raw.githubusercontent.com/hideyukiMORI/nene-poker/main/install.ps1 | iex
+```
+
+既定の WSL のディストリビューションの中で同じインストーラを流し、`%LOCALAPPDATA%\nene-poker\bin` に小さな `nene-poker.cmd` を置いて、そのフォルダをユーザーの PATH に足します。
+これで PowerShell からも cmd からも `nene-poker` で起動できます（中身は `wsl.exe` で WSL の nene-poker を呼ぶだけです）。別のディストリビューションに入れるときは `NENE_POKER_DISTRO` を設定してください。
+スクリプトは [install.ps1](install.ps1) です。消すとき: `%LOCALAPPDATA%\nene-poker` を消して PATH から外し、`wsl rm ~/.local/bin/nene-poker`
+
 <details>
 <summary>手で入れる</summary>
 

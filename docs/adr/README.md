@@ -29,3 +29,4 @@ ADR は「なぜそう決めたか」「何を却下したか」を書く。
 | [0011](0011-equity-estimate-and-cast.md) | AI は回数で打ち切る勝率の見積もり＋ポットオッズ＋性格で選び、キャスト 4 名は性格の 4 つの値で分ける | 受理 |
 | [0012](0012-cyber-hud-themes-compact-and-banter.md) | サイバー HUD の 12 テーマ・縮小版（80 × 24）・キャストの顔とセリフ（1 人 50 本） | 受理 |
 | [0013](0013-release-pipeline.md) | 版の入力は Version.swift の 1 か所、配布物は静的リンクの 1 経路で作り、検査してから梱包する | 受理 |
+| [0014](0014-powershell-installer.md) | PowerShell からは install.ps1 で WSL の中に入れ、Windows 側には wsl.exe で起動する nene-poker.cmd だけを置く | 受理 |
