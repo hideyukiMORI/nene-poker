@@ -53,7 +53,7 @@ import Testing
 
     @Test func theWinnerOfAnUncontestedHandKeepsTheirCardsHiddenInYou() throws {
         let uncontested = try #require(
-            Steps.all.first { series in
+            Steps.find { series in
                 guard case .complete(let result) = series.hand.progress else {
                     return false
                 }

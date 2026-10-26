@@ -9,7 +9,7 @@ and [NeNe Igo](https://github.com/hideyukiMORI/nene-igo) (Go). The chips are ima
 🚧 **Work in progress.** The table is drawn (112 x 28) with four AI players who choose by a Monte Carlo equity estimate, pot odds and personality; `v` switches between showing only your
 cards and showing everyone's, `q` quits. The cards and the hand evaluator are in place: over all 2,598,960 five-card hands and all 133,784,560
 seven-card hands, the count of every hand category matches the published tables. The table rules (blinds, minimum raises, short all-ins, side pots, split pots and odd chips, heads-up) follow Robert's Rules of Poker, version 11.
-Themes, the compact layout and the banter come next.
+Twelve color themes (`t`), a compact 80 x 24 layout and four characters with fifty lines each are in place. Packaging comes next.
 
 ## Development
 

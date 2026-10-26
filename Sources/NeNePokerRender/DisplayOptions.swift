@@ -11,6 +11,11 @@ public struct DisplayOptions: Sendable, Hashable {
         self.traits = traits
     }
 
+    /// テーマを次へ替えた組（`t`）。
+    public var cyclingTheme: DisplayOptions {
+        DisplayOptions(theme: theme.next, view: view, traits: traits)
+    }
+
     /// 札の見せ方を切り替えた組（`v`）。
     public var togglingView: DisplayOptions {
         DisplayOptions(theme: theme, view: view.toggled, traits: traits)

@@ -25,13 +25,34 @@ enum Steps {
         return steps
     }()
 
+    /// 条件に合う歩。`all` に無ければ、ほかのシードの 1 卓ずつを順に探す（AI の打ち方では珍しい場面のため）。
+    static func find(_ matches: (TableSeries) -> Bool) -> TableSeries? {
+        if let found = all.first(where: matches) {
+            return found
+        }
+        for seed in 100..<160 {
+            var generator = SplitMix64(seed: UInt64(seed))
+            var series = TableSeries.first(rules: rules, using: &generator)
+            while series.tally.finishedTables < 1 {
+                if matches(series) {
+                    return series
+                }
+                series = series.advanced(using: &generator)
+            }
+        }
+        return nil
+    }
+
     static let boxed = TerminalTraits(frame: .boxDrawing, colors: .trueColor)
 
-    static func render(_ series: TableSeries, view: ViewMode, frame: FrameStyle = .boxDrawing) -> Grid {
-        let options = DisplayOptions(
-            theme: .standard, view: view, traits: TerminalTraits(frame: frame, colors: .trueColor))
+    static func render(
+        _ series: TableSeries, view: ViewMode, frame: FrameStyle = .boxDrawing,
+        layout: Layout = Layout(theme: .standard)
+    ) -> Grid {
+        let traits = TerminalTraits(frame: frame, colors: .trueColor)
+        let options = DisplayOptions(theme: layout.theme, view: view, traits: traits)
         let state = ScreenState(series: series, options: options, seed: 1, countdown: Countdown(remaining: 2, total: 3))
-        return TableRenderer.render(state, size: TableRenderer.minimumSize)
+        return TableRenderer.render(state, size: layout.compact ? TableRenderer.minimumSize : TableRenderer.largeSize)
     }
 
     static func cells(_ grid: Grid) -> [Cell] {

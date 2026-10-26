@@ -7,6 +7,8 @@ import NeNePokerEngine
 struct HudSections: Sendable {
     let state: ScreenState
     let panel: Panel
+    /// 縮小版（ラベルを詰め、棒を短くする）。
+    let compact: Bool
 
     private var theme: Theme {
         state.options.theme
@@ -20,21 +22,19 @@ struct HudSections: Sendable {
     func match() -> [[Segment]] {
         let hand = series.hand
         let level = hand.level
+        let gap = compact ? " " : "  "
         return [
             panel.header(Wording.match, title: theme.accent, frame: theme.frame, first: true),
             row([
-                Segment(Wording.tableLabel, theme.dim), Segment(Wording.tableNumber(series.tableNumber), theme.text),
-                Segment(Wording.handLabel, theme.dim), Segment(Wording.padded(hand.number, width: 3), theme.text),
+                Segment("TABLE" + gap, theme.dim), Segment(Wording.tableNumber(series.tableNumber), theme.text),
+                Segment(gap + "HAND" + gap, theme.dim), Segment(Wording.padded(hand.number, width: 3), theme.text),
             ]),
             row([
-                Segment(Wording.blindsLabel, theme.dim),
-                Segment(Wording.chips(level.smallBlind) + " / " + Wording.chips(level.bigBlind), theme.text),
-                Segment(Wording.levelLabel, theme.dim), Segment(String(level.number), theme.text),
+                Segment("BLINDS" + gap, theme.dim),
+                Segment(Wording.chips(level.smallBlind) + "/" + Wording.chips(level.bigBlind), theme.text),
+                Segment(gap + "LVL ", theme.dim), Segment(String(level.number), theme.text),
             ]),
-            row([
-                Segment(Wording.dealerLabel, theme.dim),
-                Segment(series.lineup.persona(at: hand.button).name, theme.text),
-            ]),
+            row([Segment("DEALER" + gap, theme.dim), Segment(series.lineup.persona(at: hand.button).name, theme.text)]),
         ]
     }
 
@@ -49,7 +49,8 @@ struct HudSections: Sendable {
             guard chips > 0 || state.series.hand.status(of: seat) != .out else {
                 return row([label, Segment(Wording.out, theme.dim)])
             }
-            let bar = panel.bar(Fraction(value: chips, total: total), cells: 8, fill: theme.chipBar, frame: theme.frame)
+            let bar = panel.bar(
+                Fraction(value: chips, total: total), cells: compact ? 4 : 8, fill: theme.chipBar, frame: theme.frame)
             return row([label] + bar + [Segment(" " + Wording.rightAligned(Wording.chips(chips), to: 7), theme.text)])
         }
         return [panel.header(Wording.stacks, title: theme.accent, frame: theme.frame, first: false)] + rows
@@ -110,7 +111,7 @@ struct HudSections: Sendable {
             ]
         }
         if let main = result.awards.first?.winners.first, let strength = result.shown[main] {
-            lines.append([Segment(HandName.of(strength), theme.text)])
+            lines += HandName.wrapped(HandName.of(strength), width: panel.width - 4).map { [Segment($0, theme.text)] }
         }
         return lines
     }

@@ -58,7 +58,9 @@ import Testing
             #expect(!siblings.contains(persona.name))
             #expect(persona.name.count <= 10)
             #expect(persona.name.contains("."))
-            #expect(persona.face.count == 3 && persona.face.allSatisfy(\.isASCII))
+            for mood in Mood.allCases {
+                #expect(persona.face(mood).count == 3 && persona.face(mood).allSatisfy(\.isASCII))
+            }
         }
     }
 

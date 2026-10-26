@@ -9,4 +9,5 @@ struct SeriesState: Sendable, Hashable {
     let lineup: Lineup
     let tally: ChampionTally
     let events: [TableEvent]
+    let banter: Banter
 }

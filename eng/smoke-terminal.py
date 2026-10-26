@@ -5,7 +5,7 @@
 
 見ること:
 - alternate screen に入り、24 ビットの色で卓と HUD（`TABLE 001`）を描く
-- `v` で札の見せ方が `VIEW: YOU` から `VIEW: ALL` に替わる
+- `t` で次のテーマ（PHOSPHOR）に、`v` で札の見せ方が `VIEW: YOU` から `VIEW: ALL` に替わる
 - 罫線の幅の問い合わせに答えない端末（この疑似端末）では ASCII の枠に落ちる
 - `q`・Ctrl+C・SIGTERM のどれで終わっても exit 0 で、出力の最後が端末を戻す列で、termios の lflag が起動前と同じ
 - SIGSEGV（異常終了）でも端末を戻してから、そのシグナルで死ぬ
@@ -13,7 +13,7 @@
 - 間違った起動オプションは exit 2、端末の外から起動すると exit 1（どちらも理由を 1 行）
 
 標準ライブラリだけで書く。Windows Terminal での見え方の代わりにはならない（QLT-013）。
-移植元: NeNe Igo eng/smoke-terminal.py（コミット 2a46f6e。Igo は NeNe Reversi から移植した）。端末を大の配置が入る 116 × 30 にし、`t` を `v` に替えた。
+移植元: NeNe Igo eng/smoke-terminal.py（コミット 2a46f6e。Igo は NeNe Reversi から移植した）。端末を大の配置が入る 116 × 30 にし、`v` を足した。
 """
 
 from __future__ import annotations
@@ -118,7 +118,7 @@ def main() -> int:
     binary = sys.argv[1]
     failures: list[str] = []
     for label, keys, send, expect in (
-        ("q", [b"v", b"q"], None, ("exit", 0)),
+        ("q", [b"t", b"v", b"q"], None, ("exit", 0)),
         ("Ctrl+C", [b"\x03"], None, ("exit", 0)),
         ("SIGTERM", [], signal.SIGTERM, ("exit", 0)),
         ("SIGSEGV", [], signal.SIGSEGV, ("signal", signal.SIGSEGV)),
@@ -136,6 +136,7 @@ def main() -> int:
         if label == "q":
             last = "\n".join(final_screen(text))
             check("v: 札の見せ方が YOU から ALL に替わる（最後の画面のキーの帯）", "VIEW: YOU" in plain and "[v] VIEW: ALL" in last, failures)
+            check("t: 次のテーマ（PHOSPHOR）に替わる（最後の画面のキーの帯）", "THEME: PHOSPHOR" in last, failures)
             check("幅の問い合わせに答えない端末では ASCII の枠に落ちる", "+-[ MATCH ]" in plain and "┌" not in plain, failures)
         if label == "resize":
             check("resize: 小さくすると 1 行の文言を出し、戻すと卓を描き直す",
