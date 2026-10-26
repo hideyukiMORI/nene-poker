@@ -27,3 +27,4 @@ ADR は「なぜそう決めたか」「何を却下したか」を書く。
 | [0009](0009-terminal-loop-and-signals.md) | 端末と 1 本のループは NeNe Igo から移植し、Terminal の標準モジュールに Synchronization を足す | 受理 |
 | [0010](0010-screen-photos-on-windows-terminal.md) | 実機（Windows Terminal）の画面写真で、札・4 色・VIEW の両モード・文字幅を確かめ、ハンドの終わりの席のチップを分配の後の値にする | 受理 |
 | [0011](0011-equity-estimate-and-cast.md) | AI は回数で打ち切る勝率の見積もり＋ポットオッズ＋性格で選び、キャスト 4 名は性格の 4 つの値で分ける | 受理 |
+| [0012](0012-cyber-hud-themes-compact-and-banter.md) | サイバー HUD の 12 テーマ・縮小版（80 × 24）・キャストの顔とセリフ（1 人 50 本） | 受理 |

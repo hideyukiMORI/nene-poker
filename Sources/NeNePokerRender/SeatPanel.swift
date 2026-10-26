@@ -29,21 +29,31 @@ struct SeatPanel: Sendable {
         grid.write(stackLine(seat), column: column + 2, row: row + 2, background: theme.felt)
     }
 
-    /// 南の席（メインの子）: 名前の行・チップと位置と直前の行動・大きい札 2 枚・いまの役の名前。
-    func main(column: Int, row: Int, into grid: inout Grid) {
+    /// 南の席（メインの子）: 名前の行・チップと位置と直前の行動・札 2 枚（大の配置は大きい札・縮小版は小さい札）・いまの役の名前。
+    func main(at point: GridPoint, compact: Bool, into grid: inout Grid) {
         let seat = Seat.south
-        grid.write(nameLine(seat), column: column, row: row, background: theme.felt)
-        grid.write(stackLine(seat) + position(seat), column: column + 2, row: row + 1, background: theme.felt)
+        grid.write(nameLine(seat), column: point.column, row: point.row, background: theme.felt)
+        grid.write(
+            stackLine(seat) + position(seat), column: point.column + 2, row: point.row + 1, background: theme.felt)
         let show = CardVisibility.show(seat, in: hand, view: state.options.view)
         guard show != .none else {
             return
         }
         for (index, card) in hand.holeCards(of: seat).enumerated() {
-            painter.large(card, show, at: GridPoint(column: column + 2 + index * 8, row: row + 2), into: &grid)
+            let at = GridPoint(column: point.column + 2 + index * (compact ? 5 : 8), row: point.row + 2)
+            if compact {
+                painter.small(card, show, at: at, into: &grid)
+            } else {
+                painter.large(card, show, at: at, into: &grid)
+            }
         }
-        if let name = handName(of: seat) {
-            let colors = CellColors(foreground: theme.feltText, background: theme.felt)
-            grid.write(name, column: column + 19, row: row + 3, colors: colors)
+        guard let name = handName(of: seat) else {
+            return
+        }
+        let colors = CellColors(foreground: theme.feltText, background: theme.felt)
+        let start = GridPoint(column: point.column + (compact ? 12 : 19), row: point.row + (compact ? 2 : 3))
+        for (offset, line) in HandName.wrapped(name, width: compact ? 28 : 40).enumerated() {
+            grid.write(line, column: start.column, row: start.row + offset, colors: colors)
         }
     }
 
@@ -57,7 +67,8 @@ struct SeatPanel: Sendable {
             turn = false
         }
         let marker = Segment(turn ? glyphs.turn + " " : "  ", theme.turnMarker)
-        let name = Segment(persona.name + " " + persona.face, turn ? theme.turnMarker : theme.feltText)
+        let face = state.series.banter.lines.last { $0.seat == seat }?.face ?? persona.face(.neutral)
+        let name = Segment(persona.name + " " + face, turn ? theme.turnMarker : theme.feltText)
         let button = Segment(hand.button == seat ? " " + Wording.dealer : "", theme.feltText)
         return [marker, name, button]
     }

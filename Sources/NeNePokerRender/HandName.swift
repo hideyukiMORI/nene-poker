@@ -29,6 +29,15 @@ enum HandName {
         }
     }
 
+    /// 幅に入らなければ `, ` で 2 行に折る（略さない・画面仕様の Edge Cases）。
+    static func wrapped(_ name: String, width: Int) -> [String] {
+        let parts = name.split(separator: ",", maxSplits: 1)
+        guard name.count > width, parts.count == 2 else {
+            return [name]
+        }
+        return [String(parts[0]) + ",", String(parts[1].dropFirst())]
+    }
+
     private static func single(_ rank: Rank) -> String {
         words[rank.rawValue].single
     }

@@ -6,13 +6,50 @@ import Testing
 
 /// 卓の画面（画面仕様の B 案の大の配置・FR-07・FR-07a・FR-07b・FR-10・FR-15・ADR 0008）。
 @Suite struct TableRendererTests {
-    @Test func theLargeLayoutNeeds112By28AndASmallerTerminalGetsOneLine() {
-        #expect(TableRenderer.minimumSize == ScreenSize(columns: 112, rows: 28))
+    @Test func theTwoLayoutsAre112By28And80By24AndASmallerTerminalGetsOneLine() {
+        #expect(TableRenderer.largeSize == ScreenSize(columns: 112, rows: 28))
+        #expect(TableRenderer.minimumSize == ScreenSize(columns: 80, rows: 24))
         let options = DisplayOptions(theme: .standard, view: .you, traits: Steps.boxed)
         let state = ScreenState(series: Steps.all[0], options: options, seed: 1, countdown: nil)
-        let small = TableRenderer.render(state, size: ScreenSize(columns: 80, rows: 24))
-        #expect(Steps.text(small).hasPrefix("TERMINAL TOO SMALL (NEED 112x28)"))
+        let small = TableRenderer.render(state, size: ScreenSize(columns: 79, rows: 24))
+        #expect(Steps.text(small).hasPrefix("TERMINAL TOO SMALL (NEED 80x24)"))
+        #expect(Steps.text(TableRenderer.render(state, size: ScreenSize(columns: 100, rows: 26))).contains("[ MATCH ]"))
         #expect(TableRenderer.render(state, size: ScreenSize(columns: 0, rows: 0)).size.columns == 0)
+    }
+
+    @Test func theCompactLayoutKeepsEverythingAndWrapsLongHandNames() {
+        let compact = Steps.text(
+            Steps.render(Steps.all[5], view: .you, layout: Layout(theme: .standard, compact: true)))
+        #expect(compact.contains("[ MATCH ]") && compact.contains("[ STACKS ]") && compact.contains("[ LOG ]"))
+        #expect(compact.contains("[q]") && compact.contains("[t]") && compact.contains("[v] YOU"))
+        #expect(HandName.wrapped("FULL HOUSE, KINGS OVER THREES", width: 25) == ["FULL HOUSE,", "KINGS OVER THREES"])
+        #expect(HandName.wrapped("PAIR OF QUEENS", width: 25) == ["PAIR OF QUEENS"])
+    }
+
+    @Test func commsShowTheLatestTwoRemarksWithTheSpeakerAndFace() throws {
+        let series = Steps.all[0]
+        let text = Steps.text(Steps.render(series, view: .you))
+        for remark in series.banter.lines {
+            #expect(text.contains(remark.persona.name) && text.contains(remark.text))
+        }
+        #expect(series.banter.lines.count == 2)
+    }
+
+    @Test func themesCycleThroughTwelveAndCanBeNamed() {
+        #expect(Theme.catalog.count == 12)
+        #expect(
+            Theme.catalog.map(\.name) == [
+                "NEON", "PHOSPHOR", "AMBER", "SYNTHWAVE", "GLACIER", "BLOODMOON", "VAPOR", "MONO", "TOXIC", "GILDED",
+                "ABYSS", "PAPER",
+            ])
+        var theme = Theme.standard
+        for _ in 0..<12 {
+            theme = theme.next
+        }
+        #expect(theme == .standard)
+        #expect(Theme.named("paper")?.name == "PAPER" && Theme.named("nope") == nil)
+        let options = DisplayOptions(theme: .standard, view: .you, traits: Steps.boxed)
+        #expect(options.cyclingTheme.theme.name == "PHOSPHOR" && options.cyclingTheme.view == .you)
     }
 
     /// ASCII の枠では画面の文字はすべて ASCII。罫線の枠でも、ASCII 以外は枠の字形だけ。
@@ -37,25 +74,27 @@ import Testing
         }
     }
 
-    /// 文字のあるセル（英字・数字・`#`・`-`）の前景と背景は 4.5:1 以上（WCAG）。枠の罫線と飾りは控えめな色で描く設計なので対象にしない。
-    @Test func textCellsHaveEnoughContrastInBothViews() {
+    /// 12 テーマ × 2 つの配置 × 2 つの VIEW で、文字のあるセル（英字・数字・卓の上の `#`・`-` 等）の前景と背景は 4.5:1 以上（WCAG・画面仕様の Accessibility Notes）。
+    /// 枠の罫線と飾りは控えめな色で描く設計なので対象にしない。
+    @Test(arguments: Layout.all)
+    func textCellsHaveEnoughContrast(_ layout: Layout) {
         let marks = Set("#-+/,()")
         for series in Steps.sampled {
             for view in ViewMode.allCases {
-                for cell in Steps.cells(Steps.render(series, view: view))
+                for cell in Steps.cells(Steps.render(series, view: view, layout: layout))
                 where cell.character.isLetter || cell.character.isNumber
-                    || (marks.contains(cell.character) && cell.background != Theme.standard.ground
-                        && cell.background != Theme.standard.panel)
+                    || (marks.contains(cell.character) && cell.background != layout.theme.ground
+                        && cell.background != layout.theme.panel)
                 {
-                    #expect(Contrast.ratio(cell.foreground, cell.background) >= 4.5, "\(cell)")
+                    #expect(Contrast.ratio(cell.foreground, cell.background) >= 4.5, "\(layout) \(cell)")
                 }
             }
         }
     }
 
-    /// 画面仕様の Design Tokens の条件。
-    @Test func theThemeTokensMeetTheirContrastConditions() {
-        let theme = Theme.standard
+    /// 画面仕様の Design Tokens の条件（12 テーマすべて）。
+    @Test(arguments: Theme.catalog)
+    func theThemeTokensMeetTheirContrastConditions(_ theme: Theme) {
         #expect(theme.felt != theme.ground)
         #expect(Contrast.ratio(theme.feltText, theme.felt) >= 4.5)
         #expect(Contrast.ratio(theme.cardFace, theme.felt) >= 3)

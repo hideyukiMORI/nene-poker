@@ -4,7 +4,7 @@ import NeNePokerTerminal
 
 /// 卓の列を時計で回す 1 本のループ（ADR 0009）。状態はすべてこの値の中にあり、ループの外へ出ない（ARC-005）。
 ///
-/// 移植元: NeNe Igo `Sources/nene-igo/Screensaver.swift`（コミット 2a46f6e）。テーマのキーの代わりに札の見せ方のキー（`v`）を持つ。
+/// 移植元: NeNe Igo `Sources/nene-igo/Screensaver.swift`（コミット 2a46f6e）。札の見せ方のキー（`v`）を足した。
 /// `v` は表示の値（DisplayOptions）だけを替え、卓の列と乱数源には触れない（FR-07a）。
 struct Screensaver {
     private let options: LaunchOptions
@@ -54,6 +54,8 @@ struct Screensaver {
             switch intent {
             case .quit:
                 return
+            case .cycleTheme:
+                display = display.cyclingTheme
             case .toggleView:
                 display = display.togglingView
             }

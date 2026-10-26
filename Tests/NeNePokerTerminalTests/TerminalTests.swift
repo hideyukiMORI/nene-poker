@@ -22,6 +22,7 @@ struct TerminalTests {
         #expect(KeyIntent.decode([0x1B, UInt8(ascii: "["), UInt8(ascii: "A"), UInt8(ascii: "q")]) == [.quit])
         #expect(KeyIntent.decode(Array("xz".utf8)).isEmpty)
         #expect(KeyIntent.decode(Array("vV".utf8)) == [.toggleView, .toggleView])
+        #expect(KeyIntent.decode(Array("tT".utf8)) == [.cycleTheme, .cycleTheme])
     }
 
     @Test func firstFrameClearsTheScreenAndWritesEverything() {

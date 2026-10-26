@@ -9,6 +9,7 @@ struct FeltFrame: Sendable {
     let row: Int
     let width: Int
     let height: Int
+    let plan: FeltPlan
 
     /// 枠の中の左上（中身の原点）。
     private var inner: GridPoint {
@@ -23,10 +24,12 @@ struct FeltFrame: Sendable {
         }
         let seats = SeatPanel(state: state, painter: CardPainter(theme: theme), glyphs: glyphs)
         let origin = inner
-        seats.small(.north, column: origin.column + 26, row: origin.row, into: &grid)
-        seats.small(.west, column: origin.column + 2, row: origin.row + 7, into: &grid)
-        seats.small(.east, column: origin.column + 50, row: origin.row + 7, into: &grid)
-        seats.main(column: origin.column + 18, row: origin.row + 12, into: &grid)
+        for (seat, point) in [(Seat.north, plan.north), (.west, plan.west), (.east, plan.east)] {
+            seats.small(seat, column: origin.column + point.column, row: origin.row + point.row, into: &grid)
+        }
+        seats.main(
+            at: GridPoint(column: origin.column + plan.south.column, row: origin.row + plan.south.row),
+            compact: plan.compact, into: &grid)
         center(state, theme: theme, into: &grid)
     }
 
@@ -46,10 +49,11 @@ struct FeltFrame: Sendable {
         let hand = state.series.hand
         let painter = CardPainter(theme: theme)
         let origin = inner
-        let boardColumn = origin.column + 25
+        let boardColumn = origin.column + plan.board.column
         for slot in 0..<5 {
             let card = slot < hand.board.count ? hand.board[slot] : nil
-            painter.board(card, at: GridPoint(column: boardColumn + slot * 5, row: origin.row + 8), into: &grid)
+            painter.board(
+                card, at: GridPoint(column: boardColumn + slot * 5, row: origin.row + plan.board.row), into: &grid)
         }
         let layers = hand.potLayers.map(\.amount)
         let sides = layers.dropFirst().enumerated().map { index, amount in
