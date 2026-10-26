@@ -172,5 +172,6 @@ Waivers: none | WVR-NNNN
 - 実機（Windows Terminal）の画面写真で、札・4 色・VIEW の両モード・文字幅を確かめた（ADR 0010。施主の見た目の確認は未）
 - 4 名（BLUFF.EXE・NIT.BAK・TILT.SH・ODDS.CSV）が勝率の見積もり＋ポットオッズ＋性格で打つ。1 卓は中央値で約 6 分（ADR 0011）
 - 12 テーマ（`t` と `--theme`）・2 段の配置（112 × 28 と 80 × 24）・キャストの顔とセリフ（1 人 50 本・ADR 0012）
-- 動かないもの: Release（Phase 4 で成果物まで作る。タグと公開は施主の確認の後）
+- 公開の仕組み: `make release TAG=v<版>`（静的リンク・成果物の検査・SHA256SUMS）・`install.sh`・README（英語）と README.ja.md（ADR 0013）
+- 動かないもの: v0.1.0 の Release（未公開。タグの push と Release の作成は施主の確認を取ってから）
 - 施主の決定は [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) にそろっている。決定を覆したくなった点や、要件に無い機能を足したくなった点は、自分で決めずに施主に聞く

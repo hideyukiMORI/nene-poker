@@ -43,6 +43,11 @@ Then the active issue, the relevant accepted ADRs, and any active waivers.
 - Do not claim a command passed unless it was actually executed.
 - Prefer the smallest change that fully follows the canonical path.
 
+## Releases
+
+The only way to build release artifacts is `make release TAG=v<version>` (version input: `Sources/nene-poker/Version.swift`).
+Publishing a tag or a GitHub Release is an outside action: do it only after the owner confirms.
+
 ## The only definition of done
 
 ```bash
