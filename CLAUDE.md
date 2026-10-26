@@ -48,6 +48,11 @@ Claude Code / AI エージェントがこのリポジトリで作業するため
 札の内部表記は 1 つ。表示（`As` `Td`・ランクの 10 は `T`・スートは小文字 `s h d c`）への変換は Render だけが持つ。
 スート記号 `♠♥♦♣` は Emoji=Yes で前景色が効かない（Gambit ADR 0013 の ♟ と同じ）ので画面に出さない。
 
+### 卓のルールは出典の番号で引く
+
+ベッティング・ポット・親の回り方は Robert's Rules of Poker（Version 11）に従う（ADR 0007 の表に節と番号）。
+全部のチップを出す行動は `allIn` の 1 つで、`bet` / `raise` / `call` で全部に届く額は拒む。合法な行動は `Hand.legalActions` の 1 経路で、Engine もここから選ぶ。
+
 ### VIEW のモードは表示だけ
 
 `v` の「プレイヤー以外伏せる／全員見える」は Render の入力にだけある。Core と Engine の型に現れない（ADR 0004）。
@@ -152,5 +157,6 @@ Waivers: none | WVR-NNNN
 現在のタスクは [docs/todo/current.md](docs/todo/current.md)。GitHub Issue が正で、そこは要約。
 
 - 動くもの: `make check`。Core の札・山札・役判定（7 枚から最良の 5 枚）。5 枚と 7 枚の全数の役の数が公表値と一致（ADR 0005・0006）
-- 動かないもの: 卓のルール（Phase 3-2）・画面・AI。卓のルールが手作りの局面とチップの保存で確かめられるまで画面に入らない
+- 動くもの: Core の卓のルール（ブラインド・4 つのストリート・最小レイズ・足りないオールイン・サイドポット・スプリットと端数・ヘッズアップ・卓の終わり）。出典は Robert's Rules of Poker Version 11（ADR 0007）
+- 動かないもの: 画面・AI（Phase 3-3 から）
 - 施主の決定は [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) にそろっている。決定を覆したくなった点や、要件に無い機能を足したくなった点は、自分で決めずに施主に聞く
