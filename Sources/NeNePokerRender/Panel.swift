@@ -37,8 +37,8 @@ struct Panel: Sendable {
 
     /// 棒グラフ（`▕████░░░░▏`）。割合を `cells` 桁で描く。
     func bar(_ share: Fraction, cells: Int, fill: Rgb, frame: Rgb) -> [Segment] {
-        let ratio = share.total > 0 ? Double(share.value) / Double(share.total) : 0
-        let filled = Int((ratio * Double(cells)).rounded())
+        // 四捨五入を整数で（`Double` の `rounded()` は libm を呼ぶ・ADR 0011）
+        let filled = share.total > 0 ? (share.value * cells * 2 + share.total) / (share.total * 2) : 0
         let full = min(max(filled, 0), cells)
         return [
             Segment(glyphs.barOpen, frame), Segment(String(repeating: glyphs.barFull, count: full), fill),

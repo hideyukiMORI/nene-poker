@@ -69,10 +69,7 @@ public struct TableSeries: Sendable, Hashable {
     private func stepped(using generator: inout some RandomNumberGenerator) -> TableSeries {
         switch hand.progress {
         case .awaitingAction(let seat):
-            guard let legal = hand.legalActions else {
-                preconditionFailure("行動を待つときは合法な一覧がある")
-            }
-            let action = RandomPolicy.choose(from: legal, using: &generator)
+            let action = ActionChooser.choose(in: hand, style: lineup.persona(at: seat).style, using: &generator)
             guard case .applied(let next) = hand.apply(action) else {
                 preconditionFailure("合法な一覧から選んだ行動は必ず適用できる: \(action)")
             }

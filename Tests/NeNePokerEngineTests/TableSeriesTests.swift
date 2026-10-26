@@ -62,15 +62,24 @@ import Testing
         }
     }
 
-    @Test func theRandomPolicyOnlyChoosesLegalActions() {
+    /// AI が返す行動は必ず合法（指示書 第 2-2 節）。4 名の性格それぞれで、乱数で進めた卓のどの手番でも確かめる。
+    @Test func everyCastMemberOnlyChoosesLegalActions() {
         var generator = SplitMix64(seed: 5)
         for series in Short.run(seed: 5, tables: 2) {
             guard let legal = series.hand.legalActions else {
                 continue
             }
-            for _ in 0..<5 {
-                #expect(legal.rejection(of: RandomPolicy.choose(from: legal, using: &generator)) == nil)
+            for persona in Persona.cast {
+                let fast = Persona.make(name: persona.name, style: TableSeriesTests.quick(persona.style))
+                let action = ActionChooser.choose(in: series.hand, style: fast.style, using: &generator)
+                #expect(legal.rejection(of: action) == nil, "\(persona.name) \(action)")
             }
         }
+    }
+
+    /// 性格はそのまま、見積もりの回数だけ減らす（テストを速くするため）。
+    private static func quick(_ style: PlayStyle) -> PlayStyle {
+        PlayStyle.make(samples: 20, looseness: style.looseness, aggression: style.aggression, bluffing: style.bluffing)
+            ?? style
     }
 }

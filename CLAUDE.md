@@ -109,6 +109,11 @@ target が import してよいのは、依存グラフの正本で宣言した�
 
 動的バイナリは glibc 2.35 では起動しない（NeNe Gambit の実測）。`make bootstrap`（または `make check` の `tools` 段）が `.tools/swiftlint` に静的バイナリを入れる。
 
+### Engine と Core では libm の関数を使わない
+
+`Double.squareRoot()` も `Double.rounded()` も libm（`sqrt`・`round`）を呼び、標準モジュールを import しない target だけをリンクするとリンクできない（ADR 0001 の X-i・ADR 0011）。
+勝率やポットオッズは整数（百分率）で数える。
+
 ### 実機の画面写真
 
 Windows Terminal での見え方は単体テストでも疑似端末でも確かめられない（QLT-013）。`wt.exe` を配列の引数で起動し、PowerShell の `PrintWindow(hwnd, hdc, 2)` で写す（ADR 0010）。
@@ -165,5 +170,6 @@ Waivers: none | WVR-NNNN
 - 動くもの: Core の卓のルール（ブラインド・4 つのストリート・最小レイズ・足りないオールイン・サイドポット・スプリットと端数・ヘッズアップ・卓の終わり）。出典は Robert's Rules of Poker Version 11（ADR 0007）
 - 動くもの: `nene-poker` が合法な行動から乱数で選ぶ 4 人の卓を端末に描き続け（112 × 28 の大の配置）、卓が終わったら次の卓へ進み、`v` で札の見せ方を替え、`q`・Ctrl+C・異常終了のどれでも端末を戻す（ADR 0008・0009）
 - 実機（Windows Terminal）の画面写真で、札・4 色・VIEW の両モード・文字幅を確かめた（ADR 0010。施主の見た目の確認は未）
-- 動かないもの: 勝率の見積もりと性格（Phase 3-5）・12 テーマ・縮小版・セリフ（Phase 3-6）
+- 4 名（BLUFF.EXE・NIT.BAK・TILT.SH・ODDS.CSV）が勝率の見積もり＋ポットオッズ＋性格で打つ。1 卓は中央値で約 6 分（ADR 0011）
+- 動かないもの: 12 テーマ・縮小版・セリフ（Phase 3-6）
 - 施主の決定は [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) にそろっている。決定を覆したくなった点や、要件に無い機能を足したくなった点は、自分で決めずに施主に聞く
