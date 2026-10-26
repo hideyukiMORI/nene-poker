@@ -26,3 +26,4 @@ ADR は「なぜそう決めたか」「何を却下したか」を書く。
 | [0008](0008-table-screen-and-random-players.md) | 卓の画面は 112 × 28 の大の配置で描き、札は札の地の色のブロックに ASCII で、VIEW のモードは Render の入力にだけ置く | 受理 |
 | [0009](0009-terminal-loop-and-signals.md) | 端末と 1 本のループは NeNe Igo から移植し、Terminal の標準モジュールに Synchronization を足す | 受理 |
 | [0010](0010-screen-photos-on-windows-terminal.md) | 実機（Windows Terminal）の画面写真で、札・4 色・VIEW の両モード・文字幅を確かめ、ハンドの終わりの席のチップを分配の後の値にする | 受理 |
+| [0011](0011-equity-estimate-and-cast.md) | AI は回数で打ち切る勝率の見積もり＋ポットオッズ＋性格で選び、キャスト 4 名は性格の 4 つの値で分ける | 受理 |

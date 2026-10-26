@@ -13,12 +13,12 @@ enum Steps {
         return rules
     }()
 
-    /// シードから、2 卓が終わるまでの各歩。
+    /// シードから、3 卓が終わるまでの各歩。
     static let all: [TableSeries] = {
         var generator = SplitMix64(seed: 9)
         var series = TableSeries.first(rules: rules, using: &generator)
         var steps = [series]
-        while series.tally.finishedTables < 2 {
+        while series.tally.finishedTables < 3 {
             series = series.advanced(using: &generator)
             steps.append(series)
         }

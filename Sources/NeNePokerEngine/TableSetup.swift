@@ -1,6 +1,6 @@
 import NeNePokerCore
 
-/// 製品の卓の決まり（初期のチップとブラインドの上がり方・FR-04）。値は Phase 3-5 で AI を入れて 1 卓の長さを測って決める（ADR 0008）。
+/// 製品の卓の決まり（初期のチップとブラインドの上がり方・FR-04）。値は AI を入れて 1 卓の長さを測って決めた（ADR 0011）。
 public enum TableSetup {
     /// 初期のチップ 1,500・10 ハンドごとに上がるブラインド。
     public static let standard: TableRules = {
