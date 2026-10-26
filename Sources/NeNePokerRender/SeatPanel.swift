@@ -80,7 +80,15 @@ struct SeatPanel: Sendable {
             return [Segment(Wording.out, theme.feltText)]
         }
         let word = SeatWord.of(seat, events: state.series.events).map { "  " + $0 } ?? ""
-        return [Segment(Wording.chips(hand.stack(of: seat)), theme.feltText), Segment(word, theme.feltText)]
+        return [Segment(Wording.chips(stack(of: seat)), theme.feltText), Segment(word, theme.feltText)]
+    }
+
+    /// 席のチップ。ハンドが終わっていれば分配の後の値（HUD の STACKS と同じ・ADR 0010）。
+    private func stack(of seat: Seat) -> Int {
+        if case .complete(let result) = hand.progress {
+            return result.stacks[seat, default: 0]
+        }
+        return hand.stack(of: seat)
     }
 
     /// 場札が 3 枚以上開いていれば、手札と場札の最良の 5 枚の役の名前。

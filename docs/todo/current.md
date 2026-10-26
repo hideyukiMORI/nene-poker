@@ -13,7 +13,8 @@
 | Phase 3-1 札と役判定 | ✅ 2026-10-26（Issue #3・5 枚と 7 枚の全数が公表値と一致・ADR 0005・0006） |
 | Phase 3-2 卓のルール | ✅ 2026-10-26（Issue #5・Robert's Rules of Poker Version 11・ADR 0007） |
 | Phase 3-3 乱数の 4 人の卓を画面に | ✅ 2026-10-26（Issue #7・ADR 0008・0009） |
-| Phase 3-4〜3-6 実機の写真・AI・HUD | 🔲 別 Issue |
+| Phase 3-4 実機の画面写真 | ✅ 2026-10-26（Issue #9・ADR 0010） |
+| Phase 3-5・3-6 AI・HUD | 🔲 別 Issue |
 | Phase 4 公開 | 🔲 別 Issue |
 
 ## 動くもの
@@ -29,8 +30,8 @@
 
 - `main` への直接 push・force push が拒まれることは試していない（ruleset の読み戻しと PR の `BLOCKED` で代えた・gate-proofs 第 4 節）
 
-- 実機（Windows Terminal）での見え方の確認・勝率の見積もりと性格・12 テーマ・縮小版・セリフ
+- 勝率の見積もりと性格・12 テーマ・縮小版・セリフ（施主の見た目の確認も未）
 
 ## 次の 1 手
 
-Phase 3-4「実機の画面写真」の Issue を立てる。Windows Terminal で札・スートの 4 色・`v` の両モード・文字幅を写真で確かめ、写真で直す。
+Phase 3-5「勝率の見積もり＋性格＋キャスト 4 名」の Issue を立てる。1 行動の計算が 1.0 秒に収まる回数・1 卓のハンド数と時間・優勝のばらつきを数十卓で計測して ADR に書く。

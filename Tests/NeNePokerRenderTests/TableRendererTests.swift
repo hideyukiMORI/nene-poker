@@ -81,6 +81,23 @@ import Testing
         #expect(you.contains("[ STACKS ]") && you.contains("[ LOG ]"))
     }
 
+    /// ハンドが終わったら、卓の席の下のチップも分配の後の値（ADR 0010。実機の写真で、勝った人が `39` のまま STACKS は `4,097` だった）。
+    @Test func seatStacksOnTheFeltShowTheChipsAfterTheAward() throws {
+        let over = try #require(
+            Steps.all.first { series in
+                guard case .complete(let result) = series.hand.progress else {
+                    return false
+                }
+                return result.stacks[.north, default: 0] != series.hand.stack(of: .north)
+            })
+        guard case .complete(let result) = over.hand.progress else {
+            return
+        }
+        let text = Steps.text(Steps.render(over, view: .you))
+        let northRows = text.split(separator: "\n").dropFirst(3).prefix(4).joined(separator: "\n")
+        #expect(northRows.contains(Wording.chips(result.stacks[.north, default: 0])))
+    }
+
     @Test func aFinishedTableShowsTheChampionAndTheCountdown() throws {
         let over = try #require(Steps.all.first { if case .tableOver = $0.phase { true } else { false } })
         let text = Steps.text(Steps.render(over, view: .you))
