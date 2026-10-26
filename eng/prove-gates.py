@@ -5,7 +5,7 @@
 「意図した規則 ID（または道具の規則名）で落ちること」を出力から確かめる。仕込まない複製（対照）では `make check` が
 exit 0 になることも確かめる。作業木そのものには触れない。
 
-違反を仕込むには Swift のソースが要るので、どの証明も同じ「足場」（依存グラフの正本どおりの 5 target・
+違反を仕込むには Swift のソースが要るので、どの証明も同じ「足場」（依存グラフの正本どおりの 5 target と Core のテスト target・
 規則に沿った最小のソース）を置いてから 1 か所だけ壊す。足場は証明のための一時物で、作業木には入れない。
 
 移植元: NeNe Igo eng/prove-gates.py（コミット dad2c2c の足場の方式。Igo は NeNe Reversi の b3dac02 から移植した）。
@@ -39,6 +39,7 @@ TARGETS = {
     "NeNePokerTerminal": ("target", '"NeNePokerRender"'),
     "nene-poker": ("executableTarget",
                     '"NeNePokerCore", "NeNePokerEngine", "NeNePokerRender", "NeNePokerTerminal"'),
+    "NeNePokerCoreTests": ("testTarget", '"NeNePokerCore"'),
 }
 
 SOURCES = {
@@ -370,9 +371,12 @@ PROOFS: list[Proof] = [
           expect_all=[rf"\({rule}\)" for rule in LINT_RULES]),
     Proof("P47", ["QLT-002"], "ソースの無いテスト target を manifest に足す（SwiftPM 自身が警告を出し、コンパイラの警告エラーの外にある）",
           lambda r: (edit(r, "Package.swift", "    targets: [",
-                          f'    targets: [\n        .testTarget(name: "NeNePokerCoreTests", dependencies: ["NeNePokerCore"], {SETTINGS}),'),
-                     (r / "Tests/NeNePokerCoreTests").mkdir(parents=True)),
+                          f'    targets: [\n        .testTarget(name: "NeNePokerEngineTests", dependencies: ["NeNePokerCore", "NeNePokerEngine"], {SETTINGS}),'),
+                     (r / "Tests/NeNePokerEngineTests").mkdir(parents=True)),
           r"swift-strict: SwiftPM かコンパイラが警告を出した"),
+    Proof("P48", ["QLT-001"], "7 枚の役の数の公表値を 1 つ変える（make check の中で swift test が実際に回って落ちること）",
+          lambda r: edit(r, "Tests/NeNePokerCoreTests/PublishedHandCounts.swift", "count: 224_848)", "count: 224_849)"),
+          r"✘ Test everySevenCardHandIsCountedLikeThePublishedTable"),
     Proof("P50", ["SWF-002"], "文字列の switch の全捕捉を case _ where true: と書く（CNF-013 の字句の外の書き方。コンパイラが網羅に数えないこと）",
           core_file("Probe.swift", "/// 証明用。\nenum Probe {\n    /// 証明用。\n    static func code(_ s: String) -> Int {\n"
                     "        switch s {\n        case \"a\":\n            return 1\n        case _ where true:\n            return 0\n        }\n    }\n}\n"),
